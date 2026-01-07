@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organ Donation Awareness</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            color: #0083b0;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: auto;
+            padding-bottom: 15px;
+            text-align: justify;
+        }
+        button {
+            background-color: #0083b0;
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #005f73;
+        }
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .checkbox-group label {
+            flex: 1 1 45%;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .form-container {
+                width: 90%;
+            }
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Organ Donation Awareness</h1>
+    <p>Your contribution can save lives. Learn how you can make a difference by registering as an organ donor.</p>
+    <p><strong>What is Organ Donation?</strong> Organ donation is the process of giving an organ or tissue to help someone who needs a transplant. One donor can save up to 8 lives.</p>
+    <p><strong>Who Can Donate?</strong> Anyone, regardless of age, can become a donor. Medical professionals determine eligibility based on medical history.</p>
+    <p><strong>How Does It Work?</strong> After a person passes away or chooses to donate a kidney or part of the liver while alive, their organs are transplanted into patients in need.</p>
+    <p><strong>Why Is Organ Donation Important?</strong> Thousands of people wait for life-saving transplants every year. Organ donation gives them a second chance at life.</p>
+    <p><strong>Steps to Become an Organ Donor:</strong></p>
+    <ul style="text-align: left; max-width: 800px; margin: auto; padding-bottom: 20px;">
+        <li>Register with an official organ donation organization.</li>
+        <li>Inform your family about your decision.</li>
+        <li>Carry an organ donor card.</li>
+        <li>Keep your medical records updated.</li>
+    </ul>
+    <button onclick="showForm()">Register as a Donor</button>
+
+    <div class="form-container" id="donationFormContainer">
+        <h2>Organ Donation Form</h2>
+        <form id="donationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label for="blood">Blood Group:</label>
+            <select id="blood" required>
+                <option value="" disabled selected>Select</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+
+            <label>Organs to Donate:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="organs[]" value="Heart"> Heart</label>
+                <label><input type="checkbox" name="organs[]" value="Liver"> Liver</label>
+                <label><input type="checkbox" name="organs[]" value="Kidney"> Kidney</label>
+                <label><input type="checkbox" name="organs[]" value="Lungs"> Lungs</label>
+            </div>
+
+            <label for="aadhaar">Upload Aadhaar:</label>
+            <input type="file" id="aadhaar" accept=".pdf,.jpg,.png" required>
+
+            <label for="health-report">Upload Health Report:</label>
+            <input type="file" id="health-report" accept=".pdf,.jpg,.png" required>
+
+            <div class="button-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showForm() {
+            document.getElementById("donationFormContainer").style.display = "block";
+        }
+
+        document.getElementById("donationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: "success",
+                title: "Form Submitted!",
+                text: "Your registration is successful!",
+                confirmButtonColor: "#0083b0"
+            });
+            document.getElementById("donationForm").reset();
+        });
+    </script>
+</body>
+</html>

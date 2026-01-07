@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fcfdfa, #f7faf7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .register-container {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px 40px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #007a59;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #007a59;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+            padding-left: 40px;
+        }
+
+        .form-group input:focus {
+            border-color: #007a59;
+            box-shadow: 0 0 5px rgba(0, 122, 89, 0.5);
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #007a59;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            background: #007a59;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #005a40;
+        }
+
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .role-btn {
+            flex: 1;
+            max-width: 150px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .role-btn.active {
+            background-color: #007a59;
+            color: #fff;
+        }
+
+        .role-btn:hover {
+            background-color: #005a40;
+            color: #fff;
+        }
+
+        /* Custom Alert Box Styles */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        #alert-box {
+            width: 300px;
+            margin: 10% auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #alert-box h2 {
+            margin-bottom: 10px;
+            color: #007a59;
+        }
+
+        #alert-message {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #close-alert {
+            padding: 10px 20px;
+            background: #007a59;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay">
+        <div id="alert-box">
+            <h2>Alert</h2>
+            <p id="alert-message"></p>
+            <button id="close-alert">Close</button>
+        </div>
+    </div>
+
+    <div class="register-container">
+        <h1>Register</h1>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <i class="fas fa-user"></i>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Email Address or Phone Number</label>
+                <i class="fas fa-envelope"></i>
+                <input 
+                    type="text"  
+                    id="contact" 
+                    name="contact" 
+                    placeholder="Enter your email or phone number" 
+                    required
+                    pattern="(^\d{10}$)|(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$)" 
+                    title="Enter a valid email or phone number">
+            </div>
+            
+
+            <div id="recaptcha-container"></div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Create a password" minlength="8" required>
+            </div>
+
+            <div class="role-selection">
+                <button type="button" class="role-btn" id="donor-btn">Register as Donor</button>
+                <button type="button" class="role-btn" id="recipient-btn">Register as Recipient</button>
+            </div>
+
+            <button type="submit" class="register-btn">Register</button>
+            <div class="form-footer">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="register.js"></script>
+</body>
+</html>

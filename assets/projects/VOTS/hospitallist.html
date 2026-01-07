@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State and District Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f7fa;
+    }
+
+    .dropdown {
+      position: relative;
+      width: 200px;
+      margin: 10px;
+    }
+
+    .dropdown select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding-right: 40px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .dropdown:after {
+      content: '▼';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #007bff;
+    }
+
+    .dropdown select:focus {
+      outline: none;
+      border-color: #66afe9;
+      box-shadow: 0 2px 6px rgba(0, 122, 255, 0.3);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .dropdown-container {
+      text-align: center;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    h4 {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .dropdown-container select {
+      width: 100%;
+    }
+
+    .large-button {
+      width: 100%;
+      height: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .large-button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .large-button:active {
+      transform: translateY(2px);
+    }
+
+    .social-icons {
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="button-container">
+    <div class="dropdown-container">
+      <h4>State</h4>
+      <div class="dropdown">
+        <select id="stateSelect">
+          <option value="ALL">Select State</option>
+          <option value="AP">Andhra Pradesh</option>
+          <option value="GA">Goa</option>
+          <option value="HP">Himachal Pradesh</option>
+          <option value="KL">Kerala</option>
+          <option value="ML">Meghalaya</option>
+          <option value="MZ">Mizoram</option>
+          <option value="SK">Sikkim</option>
+          <option value="WB">West Bengal</option>
+          <option value="UK">Uttarakhand</option>
+          <option value="MH">Maharashtra</option>
+          <option value="MN">Manipur</option>
+          <option value="NL">Nagaland</option>
+          <option value="OD">Odisha</option>
+          <option value="PB">Punjab</option>
+          <option value="RJ">Rajasthan</option>
+          <option value="TN">Tamil Nadu</option>
+          <option value="UP">Uttar Pradesh</option>
+          <option value="HR">Haryana</option> 
+          <!-- Add more states as required -->
+        </select>
+      </div>
+    </div>
+
+    <div class="dropdown-container">
+      <h4>District</h4>
+      <div class="dropdown">
+        <select id="districtSelect">
+          <option value="ALL">Select District</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="dropdown-container">
+      <h4>Hospital</h4>
+      <div class="dropdown">
+        <select id="hospitalSelect">
+          <option value="ALL">Select Hospital</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="dropdown-container">
+      <h4>Organs</h4>
+      <div class="dropdown">
+        <select id="organSelect">
+          <option value="ALL">Select Organ</option>
+          <option value="Kidney">Kidney</option>
+          <option value="Heart">Heart</option>
+          <option value="Intestine">Intestine</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="dropdown-container">
+      <h4>Graph</h4>
+      <div class="dropdown">
+        <select id="graphSelect">
+          <option value="ALL">Select Graph Type</option>
+          <option value="Bar">Bar Graph</option>
+          <option value="Pie">Pie Graph</option>
+          <option value="Line">Line Graph</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const stateSelect = document.getElementById('stateSelect');
+    const districtSelect = document.getElementById('districtSelect');
+    const hospitalSelect = document.getElementById('hospitalSelect');
+    const organSelect = document.getElementById('organSelect');
+    const graphSelect = document.getElementById('graphSelect');
+
+    const districts = {
+      AP: ['Anantapur', 'Chittoor', 'East Godavari', 'Guntur', 'Krishna', 'Kurnool', 'Nellore', 'Prakasam', 'Srikakulam', 'Visakhapatnam', 'West Godavari', 'YSR'],
+      GA: ['North Goa', 'South Goa'],
+      HP: ['Bilaspur', 'Chamba', 'Hamirpur', 'Kangra', 'Kullu', 'Mandi', 'Solan', 'Sirmaur', 'Una'],
+      KL: ['Alappuzha', 'Ernakulam', 'Idukki', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad', 'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'],
+      ML: ['East Khasi Hills', 'Jaintia Hills', 'West Khasi Hills'],
+      MZ: ['Aizawl', 'Champhai', 'Kolasib', 'Lawngtlai', 'Lunglei', 'Mamit', 'Saiha', 'Serchhip'],
+      SK: ['East Sikkim', 'North Sikkim', 'South Sikkim', 'West Sikkim'],
+      WB: ['Alipurduar', 'Bankura', 'Birbhum', 'Cooch Behar', 'Dakshin Dinajpur', 'Darjeeling', 'Hooghly', 'Howrah', 'Jalpaiguri', 'Jhargram', 'Kolkata', 'Malda', 'Murshidabad', 'Nadia', 'North 24 Parganas', 'Paschim Medinipur', 'Purba Medinipur', 'Purulia', 'South 24 Parganas'],
+      UK: ['Almora', 'Bageshwar', 'Chamoli', 'Champawat', 'Dehradun', 'Haridwar', 'Nainital', 'Pauri Garhwal', 'Pithoragarh', 'Rudraprayag', 'Tehri Garhwal', 'Udham Singh Nagar', 'Uttarkashi'],
+      MH: ['Ahmednagar', 'Akola', 'Amravati', 'Aurangabad', 'Beed', 'Bhandara', 'Buldhana', 'Chandrapur', 'Dhule', 'Gadchiroli', 'Gondia', 'Hingoli', 'Jalna', 'Kolhapur', 'Latur', 'Mumbai City', 'Mumbai Suburban', 'Nagpur', 'Nanded', 'Nandurbar', 'Nashik', 'Osmanabad', 'Palghar', 'Parbhani', 'Pune', 'Raigad', 'Ratnagiri', 'Sangli', 'Satara', 'Sindhudurg', 'Solapur', 'Thane', 'Wardha', 'Washim', 'Yavatmal'],
+      MN: ['Imphal East', 'Imphal West', 'Bishnupur', 'Churachandpur', 'Chandel', 'Senapati', 'Tamenglong', 'Ukhrul', 'Thoubal', 'Kangpokpi'],
+      NL: ['Dimapur', 'Kohima', 'Mokokchung', 'Mon', 'Peren', 'Phek', 'Tuensang', 'Wokha', 'Zunheboto'],
+      OD: ['Angul', 'Bargarh', 'Baudh', 'Balangir', 'Balasore', 'Cuttack', 'Dhenkanal', 'Ganjam', 'Gajapati', 'Jagatsinghpur', 'Jajpur', 'Kalahandi', 'Kandhamal', 'Kendrapara', 'Kendujhar', 'Koraput', 'Malkangiri', 'Mayurbhanj', 'Nabarangpur', 'Nayagarh', 'Nuapada', 'Puri', 'Rayagada', 'Sambalpur', 'Sonepur', 'Sundargarh'],
+      PB: ['Amritsar', 'Barnala', 'Bathinda', 'Faridkot', 'Fatehgarh Sahib', 'Fazilka', 'Firozpur', 'Gurdaspur', 'Hoshiarpur', 'Jalandhar', 'Kapurthala', 'Ludhiana', 'Mansa', 'Moga', 'Muktsar', 'Nawanshahr', 'Patiala', 'Rupnagar', 'Sangrur', 'Shahid Bhagat Singh Nagar', 'Tarn Taran'],
+      RJ: ['Ajmer', 'Alwar', 'Banswara', 'Baran', 'Barmer', 'Bhilwara', 'Bikaner', 'Bundi', 'Chittorgarh', 'Churu', 'Dausa', 'Dungarpur', 'Hanumangarh', 'Jaipur', 'Jaisalmer', 'Jalore', 'Jhalawar', 'Jhunjhunu', 'Jodhpur', 'Karauli', 'Kota', 'Nagaur', 'Pali', 'Rajsamand', 'Sawai Madhopur', 'Sikar', 'Sirohi', 'Tonk', 'Udaipur'],
+      TN: ['Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore', 'Dharmapuri', 'Dindigul', 'Erode', 'Kancheepuram', 'Kanyakumari', 'Karur', 'Krishnagiri', 'Madurai', 'Nagapattinam', 'Nilgiris', 'Perambalur', 'Pudukkottai', 'Ramanathapuram', 'Salem', 'Sivaganga', 'Tenkasi', 'Thanjavur', 'The Nilgiris', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupur', 'Vellore', 'Villupuram', 'Virudhunagar'],
+      UP: ['Agra', 'Aligarh', 'Allahabad', 'Ambedkar Nagar', 'Amethi', 'Amroha', 'Auraiya', 'Ayodhya', 'Azamgarh', 'Baghpat', 'Bahraich', 'Ballia', 'Balrampur', 'Banda', 'Barabanki', 'Bareilly', 'Basti', 'Bijnor', 'Budaun', 'Bulandshahr', 'Chandauli', 'Chitrakoot', 'Deoria', 'Etah', 'Etawah', 'Faizabad', 'Farrukhabad', 'Fatehpur', 'Firozabad', 'Gautam Buddha Nagar', 'Ghaziabad', 'Gonda', 'Gorakhpur', 'Hamirpur', 'Hapur', 'Hardoi', 'Hathras', 'Jalaun', 'Jaunpur', 'Jhansi', 'Kannauj', 'Kanpur', 'Kaushambi', 'Kushinagar', 'Lakhimpur Kheri', 'Lalitpur', 'Lucknow', 'Mau', 'Meerut', 'Mirzapur', 'Moradabad', 'Muzaffarnagar', 'Pilibhit', 'Pratapgarh', 'Rae Bareli', 'Rampur', 'Saharanpur', 'Sambhal', 'Sant Kabir Nagar', 'Shahjahanpur', 'Shamli', 'Shravasti', 'Siddharthnagar', 'Sitapur', 'Sonbhadra', 'Sultanpur', 'Unnao', 'Varanasi'],
+      HR: ['Ambala', 'Bhiwani', 'Faridabad', 'Fatehabad', 'Gurugram', 'Hisar', 'Jhajjar', 'Jind', 'Kaithal', 'Karnal', 'Kurukshetra', 'Mahendragarh', 'Nuh', 'Palwal', 'Panchkula', 'Panipat', 'Rewari', 'Sirsa', 'Sonipat', 'Yamunanagar']
+      // Add more states and districts as needed
+    };
+
+    const hospitals = {
+        "Chittoor": ["SRI PADMAVATHI CHILDREN'S HEART CENTER"],
+      "East Godavari": ["YASHVEDH HEALTHCARE SERVICES"],
+      "Guntur": ["Dr. Ramesh Cardiac and Multispeciality Hospital", "NRI General and Superspeciality Hospital"],
+      "Krishna": ["SVARA SUPER SPECIALITY HOSPITAL"],
+      "Visakhapatnam": ["CARE HOSPITAL", "Apollo Hospitals Enterprise Ltd", "MEDICOVER HOSPITALS", "STAR PINNACLE HEART CENTER PVT LTD"],
+      "North Goa": ["GO MEDICAL COLLEGE", "Healthway Hospitals Private Limited", "Manipal Hospitals Goa"],
+      "Bilaspur": ["AIIMS BILASPUR HIMACHAL"],
+      "Kangra": ["Dr Rajendra Prasad Government Medical College"],
+      "Shimla": ["IGMC SHIMLA", "MEDICAL TRUST HOSPITAL", "Lourdes Hospital", "Amrita Institute of Medical Sciences", "Lakeshore Hospital and Research Centre Ltd",  "PVS MEMORIAL HOSPITAL LTD","KIMS Health", "St. Thomas Hospital", "Narayana Health", "Sree Chitra Tirunal Institute for Medical Sciences", "Nehru Hospital"],
+     " Mumbai": [ "Tata Memorial Hospital", "Lilavati Hospital", "Jaslok Hospital", "Breach Candy Hospital" ],
+    "Pune": [ "Jehangir Hospital","Sahyadri Hospitals","Deenanath Mangeshkar Hospital"],
+    "Nagpur": ["Orange City Hospital and Research Institute","Care Hospital"],
+    "Imphal": ["Regional Institute of Medical Sciences (RIMS)","Shija Hospitals","Jawaharlal Nehru Institute of Medical Sciences (JNIMS)"],
+    "Kohima": [ "Naga Hospital Authority Kohima (NHAK)", "Zion Hospital" ],
+    "Bhubaneswar": [ "AIIMS Bhubaneswar", "Kalinga Hospital", "SUM Hospital" ],
+    "Cuttack": [ "SCB Medical College and Hospital" ],
+    "Chandigarh": [ "PGIMER", "Fortis Hospital", "Max Super Speciality Hospital" ],
+    "Amritsar": [ "Guru Nanak Dev Hospital", "Amandeep Hospital" ],
+    "Jaipur": [ "SMS Medical College and Hospital", "Fortis Escorts Hospital", "Manipal Hospital" ],
+   "Udaipur": [ "GBH American Hospital", "Maharana Bhupal Hospital" ],
+    "Chennai": [ "Apollo Hospitals", "Christian Medical College (CMC) Vellore",  "Madras Medical Mission" ],
+    "Coimbatore": [ "PSG Hospitals", "Kovai Medical Center and Hospital (KMCH)" ],
+    "Lucknow": ["King George's Medical University (KGMU)", "Sanjay Gandhi Postgraduate Institute of Medical Sciences (SGPGI)", "Medanta Hospital" ],
+    "Varanasi": [ "Institute of Medical Sciences (IMS) BHU","Heritage Hospital" ],
+    "Gurugram": [ "Medanta – The Medicity", "Artemis Hospital", "Fortis Memorial Research Institute" ],
+    "Faridabad": [ "Asian Institute of Medical Sciences", "Sarvodaya Hospital" ],
+    };
+
+    function populateDistricts(state) {
+      const districtOptions = districts[state] || [];
+      districtSelect.innerHTML = '<option value="ALL">Select District</option>';
+      districtOptions.forEach(district => {
+        let option = document.createElement('option');
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+      });
+    }
+
+    function populateHospitals(district) {
+      const hospitalOptions = hospitals[district] || [];
+      hospitalSelect.innerHTML = '<option value="ALL">Select Hospital</option>';
+      hospitalOptions.forEach(hospital => {
+        let option = document.createElement('option');
+        option.value = hospital;
+        option.textContent = hospital;
+        hospitalSelect.appendChild(option);
+      });
+    }
+
+    stateSelect.addEventListener('change', function() {
+      const selectedState = stateSelect.value;
+      populateDistricts(selectedState);
+      districtSelect.value = "ALL";
+      hospitalSelect.innerHTML = '<option value="ALL">Select Hospital</option>';
+    });
+
+    districtSelect.addEventListener('change', function() {
+      const selectedDistrict = districtSelect.value;
+      populateHospitals(selectedDistrict);
+    });
+  </script>
+
+</body>
+</html>

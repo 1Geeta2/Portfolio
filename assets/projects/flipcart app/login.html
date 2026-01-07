@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+
+body{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    min-height: 100vh;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+
+}       
+.form-container{
+    background-color:#fed6e3;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px 40px;
+    /* align-content: center; */
+    border-radius: 15px;
+    justify-self: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1)
+}
+
+.terms{
+    color: black;
+     font-size: 15px;
+     align-items: center;
+     margin-top:10%;
+     margin-bottom: 10%;    
+}
+
+.terms a {
+    color: #2874f0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    align-items: center;
+    margin-bottom: 10%;
+}
+    
+#box1{
+    background-color: transparent;
+    width:550px;
+    height:100%;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20%;
+    align-items: center;
+}
+button{
+    width:90%;
+    background-color: rgb(243, 91, 9); /* Flipkart blue */
+    color: white;
+    padding: 10px;
+    font-size: 19px;
+    font-weight: 700;
+    transition: 0.3s;
+    margin-top: 29px;  
+    align-items: center;
+    margin-left: 4%;
+}
+
+.form-control {
+    width: 85%;
+    border-radius: 6px;
+    padding: 20px;
+    align-items: center;
+}
+
+.signup-link a {
+    color: #2874f0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
+    margin-top:10%;
+    margin-bottom: 10%; 
+}
+
+.signup-link {
+    color: white;
+    font-size: 20px;
+    align-items: center ;
+    margin-top:10%;
+    margin-bottom: 10%; 
+    margin-left: 48px;
+}
+    </style>
+</head>
+<body> 
+    <form>
+    <div>
+    <div id="box1">
+  <div class="form-container">
+    <input type="text" id="loginInput" name="login" placeholder="Enter Email or Mobile Number" required>
+        <div class="terms">
+            By continuing, you agree to Flipkart's 
+            <a href="#">Terms of Use</a> and 
+            <a href="#">Privacy Policy</a>.
+        </div>  
+     </div>
+    <button type="submit">Request OPT</button>
+    <div class="signup-link">
+            New to Flipkart? <a href="#">Create an account</a>
+    </div>
+    </div>
+    </form>
+</body>
+</html>

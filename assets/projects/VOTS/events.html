@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News and Events</title>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #27ae60;
+            color: white;
+            font-size: 1.2rem;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ecf0f1;
+        }
+        .join-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .join-btn:hover {
+            background-color: #2980b9;
+        }
+        .go-back-btn {
+            background-color: #e74c3c;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .go-back-btn:hover {
+            background-color: #c0392b;
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Our Events</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event Title</th>
+                    <th>Event Date</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="eventsTableBody">
+                <!-- Events will be loaded dynamically from Firebase -->
+            </tbody>
+        </table>
+
+        <a href="index.html" class="go-back-btn">Go Back</a>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+    apiKey: "AIzaSyBVJNYQMsqhTjvh8xUZEsoNzi-g_z6W4-M",
+    authDomain: "awareness-campaign-35809.firebaseapp.com",
+    databaseURL: "https://awareness-campaign-35809-default-rtdb.firebaseio.com",
+    projectId: "awareness-campaign-35809",
+    storageBucket: "awareness-campaign-35809.firebasestorage.app",
+    messagingSenderId: "819894669815",
+    appId: "1:819894669815:web:369a7ecb2fbf6a24329ef2"
+  };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function loadEvents() {
+            const tableBody = document.getElementById("eventsTableBody");
+            tableBody.innerHTML = "";
+
+            db.collection("events").orderBy("date", "asc").onSnapshot((querySnapshot) => {
+                tableBody.innerHTML = "";
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const row = `<tr>
+                        <td>${data.title}</td>
+                        <td>${data.date}</td>
+                        <td>${data.description}</td>
+                        <td>${data.address || "Not provided"}</td>
+                        <td><button class="join-btn" onclick="joinEvent('${doc.id}')">Register Now</button></td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            });
+        }
+
+        function joinEvent(eventId) {
+            console.log("Redirecting to: revents.html?event=" + eventId);
+            window.location.href = `revents.html?event=${encodeURIComponent(eventId)}`;
+        }
+
+        window.onload = loadEvents;
+    </script>
+
+</body>
+</html>

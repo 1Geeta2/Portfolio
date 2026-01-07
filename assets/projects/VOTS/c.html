@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers | Secure Cyber Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        .hover-icon {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out;
+            color: black;
+        }
+        .hover-icon .bi-arrow-down-right-circle-fill {
+            display: none;
+        }
+        .hover-icon:hover .bi-arrow-down-right-circle {
+            display: none;
+        }
+        .hover-icon:hover .bi-arrow-down-right-circle-fill {
+            display: inline;
+        }
+
+        /* Pop-up styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Secure Cyber Future</h1>
+        <nav>
+            <a href="#" class="text-gray-600 px-4">Home</a>
+            <a href="#" class="text-gray-600 px-4">How it Works</a>
+            <a href="#" class="text-gray-600 px-4">Company</a>
+            <button class="bg-black text-white px-4 py-2 rounded-lg">Sign Up</button>
+        </nav>
+    </header>
+    
+    <section class="max-w-4xl mx-auto p-6">
+        <h2 class="text-3xl font-bold text-center mt-6">Be Part of Our Mission</h2>
+        <p class="text-gray-600 text-center mt-2 italic">
+            “Choose a job you love, and you will never have to work a day in your life."
+        </p>
+        
+        <div class="flex justify-center space-x-2 mt-4">
+            <button class="bg-black text-white px-4 py-2 rounded-lg">View All</button>
+            <button class="border px-4 py-2 rounded-lg">Development</button>
+            <button class="border px-4 py-2 rounded-lg">Design</button>
+            <button class="border px-4 py-2 rounded-lg">Marketing</button>
+        </div>
+    </section>
+    
+    <div id="popup-container" style="display: none;"></div>
+    <div id="overlay" class="overlay" style="display: none;"></div>
+
+    <!-- Cybersecurity Job -->
+    <section class="max-w-4xl mx-auto mt-8">
+        <div class="bg-white shadow-md rounded-lg p-6 mb-4 relative">
+            <a href="#apply" class="text-blue-600 font-semibold absolute top-4 right-4">Apply</a>
+            <h3 class="text-xl font-semibold">Cybersecurity & Ethical Hacking</h3>
+            <p class="text-gray-600">SCF is actively hiring for a cybersecurity intern.</p>
+            <div class="mt-2 flex space-x-2">
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">100% Remote</span>
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Full-time</span>
+            </div>
+            <!-- Clickable Arrow -->
+            <a href="javascript:void(0);" onclick="openPopup('popup-cybersecurity')" class="absolute bottom-4 right-4 text-2xl hover-icon" title="View Cybersecurity Info">
+                <i class="bi bi-arrow-down-right-circle"></i>
+                <i class="bi bi-arrow-down-right-circle-fill"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Software Development Job -->
+    <section class="max-w-4xl mx-auto mt-8">
+        <div class="bg-white shadow-md rounded-lg p-6 mb-4 relative">
+            <a href="#apply" class="text-blue-600 font-semibold absolute top-4 right-4">Apply</a>
+            <h3 class="text-xl font-semibold">Software Development</h3>
+            <p class="text-gray-600">SCF is actively hiring for a software development intern.</p>
+            <div class="mt-2 flex space-x-2">
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">100% Remote</span>
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Full-time</span>
+            </div>
+            <!-- Clickable Arrow -->
+            <a href="javascript:void(0);" onclick="openPopup('popup-software')" class="absolute bottom-4 right-4 text-2xl hover-icon" title="View Software Info">
+                <i class="bi bi-arrow-down-right-circle"></i>
+                <i class="bi bi-arrow-down-right-circle-fill"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto mt-8">
+        <div class="bg-white shadow-md rounded-lg p-6 mb-4 relative">
+            <a href="#apply" class="text-blue-600 font-semibold absolute top-4 right-4">Apply</a>
+            <h3 class="text-xl font-semibold">Cyber Network Defense Intern</h3>
+            <p class="text-gray-600">SCF is actively hiring for a Cyber Network Defense intern.</p>
+            <div class="mt-2 flex space-x-2">
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">100% Remote</span>
+                <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Full-time</span>
+            </div>
+            <!-- Clickable Arrow -->
+            <a href="javascript:void(0);" onclick="openPopup('popup-cyber')" class="absolute bottom-4 right-4 text-2xl hover-icon" title="View Cyber Info">
+                <i class="bi bi-arrow-down-right-circle"></i>
+                <i class="bi bi-arrow-down-right-circle-fill"></i>
+            </a>
+        </div>
+</section>
+
+
+    <!-- Cybersecurity Job Popup -->
+    <div id="popup-cybersecurity" class="popup">
+        <section class="max-w-4xl mx-auto mt-8">
+            <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+                <h3 class="text-xl font-bold">Cybersecurity & Ethical Hacking</h3>
+                <div class="flex flex-wrap text-gray-600">
+                    <p class="mr-4"><i class="bi bi-geo-alt-fill mr-2"></i>Location: Pune, Maharashtra</p>
+                    <p class="mr-4"><i class="bi bi-clock mr-2"></i>Duration: 4 Months</p>
+                    <p class="mr-4"><i class="bi bi-currency-rupee mr-1"></i>Stipend: ₹10,000/month</p>
+                    <p class="mr-4"><i class="bi bi-calendar-check mr-2"></i>Apply by: 10 Apr'25</p>
+                    <p class="mr-4"><i class="bi bi-hourglass-split mr-2"></i>Posted: 1 week ago</p>
+                    <p class="mr-4"><i class="bi bi-people-fill mr-2"></i>Applicants: 450</p>
+                </div>
+                <h4 class="font-bold mt-4">Key Responsibilities:</h4>
+                <ul class="list-disc list-inside">
+                    <li>Conduct security assessments and penetration testing.</li>
+                    <li>Identify vulnerabilities and provide remediation recommendations.</li>
+                    <li>Prepare detailed security reports.</li>
+                </ul>
+                
+                <h4 class="text-lg font-bold mt-4">Skill(s) Required:</h4>
+                <p class="text-gray-600"><i class="bi bi-tools mr-2"></i> Production Engineering</p>
+
+                <h4 class="text-lg font-bold mt-4">Who Can Apply:</h4>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>Available for a full-time (in-office) internship.</li>
+                    <li>Can start the internship between 8th Mar'25 and 12th Apr'25.</li>
+                    <li>Available for a duration of 3 months.</li>
+                    <li>Have relevant skills and interests.</li>
+                    <li>Women looking to restart their careers are encouraged to apply.</li>
+                </ul>
+
+                <p class="text-gray-600 mt-4"><i class="bi bi-123 mr-2"></i> Number of Openings: 4</p>
+
+                <h4 class="text-lg font-bold mt-4">About SCF:</h4>
+                <p class="text-gray-600">
+                    We are an agri-tech startup working on smart IoT devices and AI/ML solutions for the agriculture domain.
+                </p>
+
+                <button onclick="closePopup('popup-cybersecurity')" class="mt-4 bg-black text-white px-4 py-2 rounded-lg">Close</button>
+            </div>
+        </section>
+    </div>
+
+
+    <div id="popup-cybersecurity" class="popup">
+        <section class="max-w-4xl mx-auto mt-8">
+            <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+                <h3 class="text-xl font-bold">Cyber Network Defense Intern</h3>
+                <div class="flex flex-wrap text-gray-600">
+                    <p class="mr-4"><i class="bi bi-geo-alt-fill mr-2"></i>Location: Chennai, Tamil Nadu</p>
+                    <p class="mr-4"><i class="bi bi-clock mr-2"></i>Duration: 5 Months</p>
+                    <p class="mr-4"><i class="bi bi-currency-rupee mr-1"></i>Stipend: ₹14,000/month</p>
+                    <p class="mr-4"><i class="bi bi-calendar-check mr-2"></i>Apply by: 15 Apr'25</p>
+                    <p class="mr-4"><i class="bi bi-hourglass-split mr-2"></i>Posted: 2 weeks ago</p>
+                    <p class="mr-4"><i class="bi bi-people-fill mr-2"></i>Applicants: 310</p>
+                </div>
+
+                <h4 class="font-bold mt-4">Key Responsibilities:</h4>
+                <ul class="list-disc list-inside">
+                    <li>Monitor and protect enterprise network infrastructure.</li>
+                    <li>Respond to network-based cyber threats.</li>
+                    <li>Work with SIEM tools to analyze security incidents.</li>
+                </ul>
+
+                <h4 class="text-lg font-bold mt-4">Skill(s) Required:</h4>
+                <p class="text-gray-600"><i class="bi bi-tools mr-2"></i> Network Security, SIEM, Threat Detection, IDS/IPS</p>
+
+                <h4 class="text-lg font-bold mt-4">Who Can Apply:</h4>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>Available for a full-time (in-office) internship.</li>
+                    <li>Can start between 25th Mar'25 and 15th Apr'25.</li>
+                    <li>Available for 5 months.</li>
+                    <li>Have relevant skills and interests.</li>
+                </ul>
+
+                <p class="text-gray-600 mt-4"><i class="bi bi-123 mr-2"></i> Number of Openings: 2</p>
+
+                <button onclick="closePopup('popup-cybersecurity')" class="mt-4 bg-black text-white px-4 py-2 rounded-lg">Close</button>
+            </div>
+        </section>
+</div>
+
+
+    <!-- Software Development Job Popup -->
+    <div id="popup-software" class="popup">
+        <section class="max-w-4xl mx-auto mt-8">
+            <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+                <h3 class="text-xl font-bold">Software Development</h3>
+                <div class="flex flex-wrap text-gray-600">
+                    <p class="mr-4"><i class="bi bi-geo-alt-fill mr-2"></i>Location: Remote</p>
+                    <p class="mr-4"><i class="bi bi-clock mr-2"></i>Duration: 6 Months</p>
+                    <p class="mr-4"><i class="bi bi-currency-rupee mr-1"></i>Stipend: ₹15,000/month</p>
+                    <p class="mr-4"><i class="bi bi-calendar-check mr-2"></i>Apply by: 15 Apr'25</p>
+                    <p class="mr-4"><i class="bi bi-hourglass-split mr-2"></i>Posted: 2 weeks ago</p>
+                    <p class="mr-4"><i class="bi bi-people-fill mr-2"></i>Applicants: 300</p>
+                </div>
+                <h4 class="font-bold mt-4">Key Responsibilities:</h4>
+                <ul class="list-disc list-inside">
+                    <li>Develop and maintain web applications.</li>
+                    <li>Collaborate with cross-functional teams.</li>
+                    <li>Write clean and efficient code.</li>
+                </ul>
+                
+                <h4 class="text-lg font-bold mt-4">Skill(s) Required:</h4>
+                <p class="text-gray-600"><i class="bi bi-tools mr-2"></i> Web Development, JavaScript, React</p>
+
+                <h4 class="text-lg font-bold mt-4">Who Can Apply:</h4>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>Available for a full-time (remote) internship.</li>
+                    <li>Can start the internship between 1st Apr'25 and 15th Apr'25.</li>
+                    <li>Available for a duration of 6 months.</li>
+                    <li>Have relevant skills and interests in software development.</li>
+                    <li>Students pursuing a degree in Computer Science or related fields are encouraged to apply.</li>
+                </ul>
+
+                <p class="text-gray-600 mt-4"><i class="bi bi-123 mr-2"></i> Number of Openings: 3</p>
+
+                <h4 class="text-lg font-bold mt-4">About SCF:</h4>
+                <p class="text-gray-600">
+                    We are a tech startup focused on innovative software solutions for various industries.
+                </p>
+
+                
+                <button onclick="closePopup('popup-software')" class="mt-4 bg-black text-white px-4 py-2 rounded-lg">Close</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript for Pop-up -->
+    <script>
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

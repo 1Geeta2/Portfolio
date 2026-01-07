@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2563eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .login-method {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .alert-box {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-box.show {
+            display: block;
+        }
+
+        .social-icons {
+            justify-content: center;
+        }
+
+    </style>
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCAPYU7IUzdlLuSSs_GZ_Zb5tyBI9rSRtU",
+            authDomain: "registration-71627.firebaseapp.com",
+            projectId: "registration-71627",
+            storageBucket: "registration-71627.appspot.com",
+            messagingSenderId: "979133448173",
+            appId: "1:979133448173:web:ffc7ec02657b67a6d931e4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("login-form");
+            const loginMethods = document.querySelectorAll('input[name="login-method"]');
+            const emailGroup = document.getElementById("email-group");
+            const phoneGroup = document.getElementById("phone-group");
+            const passwordGroup = document.getElementById("password-group");
+
+            // Switch login method
+            loginMethods.forEach((radio) => {
+                radio.addEventListener("change", () => {
+                    if (radio.value === "email") {
+                        emailGroup.style.display = "block";
+                        passwordGroup.style.display = "block";
+                        phoneGroup.style.display = "none";
+                    } else {
+                        emailGroup.style.display = "none";
+                        passwordGroup.style.display = "block";
+                        phoneGroup.style.display = "block";
+                    }
+                });
+            });
+
+            // Login form submission
+            loginForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const selectedMethod = document.querySelector('input[name="login-method"]:checked').value;
+                const email = document.getElementById("email").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                if (!password) {
+                    showAlert("Please enter your password.");
+                    return;
+                }
+
+                if (selectedMethod === "email") {
+                    try {
+                        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                        const user = userCredential.user;
+
+                        const userDoc = await getDoc(doc(db, "users", user.uid));
+                        if (!userDoc.exists()) {
+                            throw new Error("User not registered.");
+                        }
+
+                        showAlert("Login successful!", true);
+                        window.location.href = "index.html"; // Redirect after successful login
+                    } catch (error) {
+                        showAlert(`Login failed: ${error.message}`);
+                    }
+                } else {
+                    // Phone Login (Checking if user is registered)
+                    if (!phone.startsWith("+")) {
+                        showAlert("Phone number must start with country code (e.g., +91 for India)");
+                        return;
+                    }
+
+                    try {
+                        const userDoc = await getDoc(doc(db, "users", phone));
+                        if (!userDoc.exists()) {
+                            throw new Error("Phone number not registered.");
+                        }
+
+                        showAlert("Login successful!", true);
+                        window.location.href = "index.html"; // Redirect after successful login
+                    } catch (error) {
+                        showAlert(`Login failed: ${error.message}`);
+                    }
+                }
+            });
+
+            function showAlert(message, success = false) {
+                const alertBox = document.getElementById("alert-box");
+                alertBox.textContent = message;
+                alertBox.style.backgroundColor = success ? "#4CAF50" : "#f44336"; // Green for success, red for error
+                alertBox.classList.add("show");
+
+                setTimeout(() => {
+                    alertBox.classList.remove("show");
+                }, 3000);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="login-method">
+                <label>
+                    <input type="radio" name="login-method" value="email" checked> Login with Email
+                </label>
+                <label>
+                    <input type="radio" name="login-method" value="phone"> Login with Phone
+                </label>
+            </div>
+
+            <div class="form-group" id="email-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group" id="phone-group" style="display: none;">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group" id="password-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+
+    <div id="alert-box" class="alert-box"></div>
+
+</body>
+</html>

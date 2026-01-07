@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work - VOTS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #ff4e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .intro {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .work-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .work-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 260px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .work-title {
+            font-weight: bold;
+            color: #ff4e50;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            border: none;
+            background-color: #ff4e50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #d8333f;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #001f61, #004aad);
+            color: #fff;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            border-top: 5px solid #ffcc00;
+            margin-top: 50px;
+        }
+
+        .footer div {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .footer a:hover {
+            color: #ffcc00;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 22px;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            .footer div {
+                margin-bottom: 20px;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Work - VOTS</h1>
+        <p class="intro">Discover the innovative solutions we have built for organ donation and transplantation. Our commitment to creating impactful technology drives us to develop meaningful features.</p>
+        
+        <div class="work-section">
+            <div class="work-card">
+                <h3 class="work-title">Emergency Hospital Availability</h3>
+                <p>Real-time updates on hospital availability for organ transplants, ensuring faster medical assistance.</p>
+            </div>
+            <div class="work-card">
+                <h3 class="work-title">Real-time Organ Tracking</h3>
+                <p>We are working on integrating live tracking of organs during transport to enhance efficiency.</p>
+            </div>
+            <div class="work-card">
+                <h3 class="work-title">Text-to-Speech for the Deaf</h3>
+                <p>Inclusive communication through text-to-speech features for individuals with hearing impairments.</p>
+            </div>
+            <div class="work-card">
+                <h3 class="work-title">Volunteer & Support</h3>
+                <p>Encouraging community participation by providing volunteer opportunities and support networks.</p>
+            </div>
+            <div class="work-card">
+                <h3 class="work-title">Awareness Campaigns</h3>
+                <p>Interactive campaigns designed to educate and engage the public on organ donation importance.</p>
+            </div>
+        </div>
+       
+        <button id="goBack">Go Back</button>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <h3>VOTS</h3>
+            <p>Vidyalankar Organs and Tissue Transplantation</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <a href="about.html">About Us</a>
+            <a href="team.html">The Team</a>
+            <a href="work.html">Our Work</a>
+            <a href="services.html">Services</a>
+        </div>
+
+        <div>
+            <h3>Legal</h3>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+        </div>
+
+        <div>
+            <h3>Contact Us</h3>
+            <a href="mailto:vots@gmail.com">vots@gmail.com</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById("goBack").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTS - Hospital Information</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Attractive Hospital Information Section */
+        .content {
+            background-color: #0288d1;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1500x800/0288d1/ffffff?text=Find+Hospitals+Nearby') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #e0f7fa;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        /* Button Style */
+        .cta-button {
+            background-color: #ff5722;
+            color: white;
+            font-size: 18px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Hover Effects */
+        .content:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Near By Government Hospital</h1>
+        <p>Find a Government hospital  near you for organ and tissue transplantation. Our network of hospitals ensures the best care and services for both donors and recipients.</p>
+        <a href="lhos/government hospitals/governmenthospital.html.html" class="cta-button">Find Hospitals</a>
+    </div>
+
+</body>
+</html>

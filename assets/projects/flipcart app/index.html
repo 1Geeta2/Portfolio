@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+  crossorigin="anonymous">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipcart Project</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">  
+</head>
+<body>  
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">   
+    <div class="logo">
+        <a href="#" onclick="window.location.reload();">
+        <img src="./assets/images/logo.jpg " alt="flipcart logo" height="40px">
+        </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <form class="d-flex mx-auto w-50">
+        <input class="form-control me-2" type="search" placeholder="Search for Products,Brands and Many More......." aria-label="Search">
+        <button class="btn btn-light" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="right-icons">
+        <li class="nav-item dropdown login hiconcss">
+            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-regular fa-circle-user"></i> Login
+          </a>
+          <ul class="dropdown-menu p-3" aria-labelledby="loginDropdown">
+            <li class="d-flex justify-content-between align-items-center mb-2">
+              <span>New customer?</span>
+              <a href="#" class="signup-link text-primary fw-bold">Sign Up</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-regular fa-user"></i> My Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-star"></i> Rewards</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box"></i> Orders</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gift"></i> Gift Cards</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a href="login.html" class="btn btn-outline-primary w-100">Login</a>
+              </li>
+            </ul>
+          </li>            
+         <li class="Cart hiconcss">
+            <i class="fa-solid fa-cart-shopping"></i>
+          <a class="nav-link active" aria-current="page" href="#">cart</a>
+        </li>
+        <li class="Store">
+             <i class="fa-solid fa-store"></i>
+          <a class="nav-link" href="#">Become a Seller</a>
+        </li>
+        <li class="Menu">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!--header end-->
+<!--catagory section-->
+
+
+<section class="container-full">
+  <div class="catagory">
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat1.jpeg" alt="Grocery">
+      <p>Grocery</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat2.jpeg" alt="Mobiles and Tablets">
+      <p>Mobiles and Tablets</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat3.webp" alt="Home Appliances">
+      <p>Home Appliances</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat4.jpeg" alt="Electronics">
+      <p>Electronics</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat5.jpeg" alt="Fashion">
+      <p>Fashion</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat6.jpg" alt="Home and Kitchen">
+      <p>Home and Kitchen</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat7.webp" alt="Beauty and Toys">
+      <p>Beauty and Toys</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat8.jpg" alt="Furniture">
+      <p>Furniture</p>
+    </a>
+
+    <a href="#" class="catimginfo active">
+      <img src="./assets/images/cat9.jpeg" alt="Flight Booking">
+      <p>Flight Booking</p>
+    </a>
+
+  </div>
+</section>
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"  aria-label="Slide 3"></button>
+  </div>
+  <div class="slider">
+    <div class="carousel-item active">
+      <img src="./assets/images/slider1.webp" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="./assets/images/slider2.webp" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="./assets/images/slider3.webp" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+<!--------------Product section------->
+
+
+<!-- <section class="container-full">
+  <div class="productsection">
+    <div class="productheader">
+      <h3>Best deal on smartphones</h3>
+    </div>
+
+    <div class="productgroup">
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product10.webp" alt="OPPO K13x 5G">
+          </div>
+          <div class="productinfo">
+            <p>OPPO K13x 5G</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 9,499*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product11.webp" alt="Moto Edge 60">
+          </div>
+          <div class="productinfo">
+            <p>Moto Edge 60</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 24,999*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product12.webp" alt="realme P4 5G">
+          </div>
+          <div class="productinfo">
+            <p>realme P4 5G</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product13.webp" alt="Smart Phone">
+        </div>
+        <div class="productinfo">
+          <p>OPPO K13 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product14.webp" alt="Smart Phone">
+        </div>
+        <div class="productinfo">
+          <p>Moto G96 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product15.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>realme P3x 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 10,999</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product16.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>Samsung Galaxy A3</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 17,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product17.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>realme P4 Pro 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 21,499*</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+ <!--Font Awesome link -->
+ <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+
+<section class="container-full">
+  <div class="productsection">
+    <div class="productheader">
+      <h3>Best deals on smartphones</h3>
+    </div>
+
+    <div class="productlayout">
+      <!-- Left: product list -->
+      <div class="productgroup">
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product10.webp" alt="OPPO K13x 5G">
+            </div>
+            <div class="productinfo">
+              <p>OPPO K13x 5G</p>
+              <h5>From ₹9,499*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product11.webp" alt="Moto Edge 60">
+            </div>
+            <div class="productinfo">
+              <p>Moto Edge 60</p>
+              <h5>From ₹24,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product12.webp" alt="realme P4 5G">
+            </div>
+            <div class="productinfo">
+              <p>realme P4 5G</p>
+              <h5>From ₹14,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product13.webp" alt="OPPO K13 5G">
+            </div>
+            <div class="productinfo">
+              <p>OPPO K13 5G</p>
+              <h5>From ₹14,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product14.webp" alt="Moto G96 5G">
+            </div>
+            <div class="productinfo">
+              <p>Moto G96 5G</p>
+              <h5>From ₹14,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product15.webp" alt="realme P3x 5G">
+            </div>
+            <div class="productinfo">
+              <p>realme P3x 5G</p>
+              <h5>From ₹10,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product16.webp" alt="Samsung Galaxy A3">
+            </div>
+            <div class="productinfo">
+              <p>Samsung Galaxy A3</p>
+              <h5>From ₹17,999*</h5>
+            </div>
+          </a>
+        </div>
+
+        <div class="product">
+          <a href="#" class="product-link">
+            <div class="productimg">
+              <img src="./assets/images/product17.webp" alt="realme P4 Pro 5G">
+            </div>
+            <div class="productinfo">
+              <p>realme P4 Pro 5G</p>
+              <h5>From ₹21,499*</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: banner -->
+      <div class="sidebanner">
+        <img src="./assets/images/banner1.webp" alt="Refrigerator Offer">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!------------Section2------------>
+
+<section class="container-full">
+  <div class="productsection">
+    <div class="productheader">
+      <h3>Best deal on appliances</h3>
+    </div>
+
+    <div class="productgroup">
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/app1.webp" alt="tv">
+          </div>
+          <div class="productinfo">
+            <p>Premium TVs</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 15,499*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/app2.webp" alt="Refrigerator">
+          </div>
+          <div class="productinfo">
+            <p>Best-selling R...</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 9,990</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/app3.webp" alt="machine">
+          </div>
+          <div class="productinfo">
+            <p>Trending deals</p>
+            <h5>Shop now!</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/app4.webp" alt="Mixer">
+        </div>
+        <div class="productinfo">
+          <p>Kitchen Essen..</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 1249</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/app5.webp" alt="Smart Phone">
+        </div>
+        <div class="productinfo">
+          <p>Home Essenti...</p>
+          <h5>Shop now!</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/app6.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>Fans & Geysers</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 799</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/app7.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>Microwave Ovens</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 4,990</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/app8.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>Lowest Price Ever</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 19,990</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Font Awesome link -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+
+
+<!-- ------------------section3--- -->
+
+<section class="container-full">
+  <div class="productsection">
+    <div class="productheader">
+      <h3>Best deal on smartphones</h3>
+    </div>
+
+    <div class="productgroup">
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product10.webp" alt="OPPO K13x 5G">
+          </div>
+          <div class="productinfo">
+            <p>OPPO K13x 5G</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 9,499*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product11.webp" alt="Moto Edge 60">
+          </div>
+          <div class="productinfo">
+            <p>Moto Edge 60</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 24,999*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+          <div class="productimg">
+            <img src="./assets/images/product12.webp" alt="realme P4 5G">
+          </div>
+          <div class="productinfo">
+            <p>realme P4 5G</p>
+            <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+          </div>
+        </a>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product13.webp" alt="Smart Phone">
+        </div>
+        <div class="productinfo">
+          <p>OPPO K13 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product14.webp" alt="Smart Phone">
+        </div>
+        <div class="productinfo">
+          <p>Moto G96 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 14,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product15.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>realme P3x 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 10,999</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product16.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>Samsung Galaxy A3</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 17,999*</h5>
+        </div>
+      </div>
+
+      <div class="product">
+        <a href="#" class="product-link">
+        <div class="productimg">
+          <img src="./assets/images/product17.webp" alt="Smart phone">
+        </div>
+        <div class="productinfo">
+          <p>realme P4 Pro 5G</p>
+          <h5>From <i class="fa-solid fa-indian-rupee-sign"></i> 21,499*</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Font Awesome link -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+ <section class="top-stories">
+    <h3>Top Stories : Brand Directory</h3>
+
+    <div class="brand-list">
+      <a href="#" class="story-item"><strong>MOST SEARCHED FOR ON FLIPKART:</strong> Big Biling Diwali Sale | Dhanteras Sale | iPhone 17 | iPhone Air | vivo v60e | msiin g08 power 5g | iPhone 17 Pro | iPhone 17 Pro Max | Google Pixel 10 | Google Pixel 10 Pro | Google Pixel 10 Pro XL | Karva Chauth Offers | Samsung Galaxy Z Flip4 5G | Redmi Note 14 5G SE | Nothing Phone 3 | Soundbars | Rings | Earrings | Sony Soundbars | Jewellery | Airpods | JBL Soundbars | Urban Power Banks | Boult Wireless Earphones | Bose Soundbars | OnePlus Wireless Earphones | vivo X Fold | Motorola Edge 60 5G | Samsung Galaxy S23 Edge | MOTOROLA Razr 60 | CMP Phone 2 Pro | Google Pixel 9A | Samsung S16 | Nothing Phone 3 | iPhone 16 | Samsung Galaxy S25 Ultra | Samsung Galaxy S25 | Samsung Galaxy S25 Plus | Samsung Galaxy S25 Series | iPhone 16 | iPhone 16 Plus | iPhone 16 Pro | iPhone 16 Pro Max | vivo V50 | Oppo Reno 13 Pro | Poco X7 | Realme 14 Pro Plus | Redmi Note 14 Pro+ 5G | Oppo Find X8 | CMF by Nothing Phone 1 | Infinix Note 40 Pro 5G | iPhone 15 | Infinix Note 40 5G | vivo X 100 | Samsung Folds | Samsung Folds | Flipkart Axis Bank Super Elite Credit Card | 5G Mobile Phones | Grievance Redressal | Track Orders | Manage Orders</a><br>
+
+      <a href="#" class="story-item"><strong>MOBILES:</strong>Infinix SMART 10 | Oppo Reno 14 Pro | Motorola g84 5g | Oppo Reno 12 | Motorola G45 5G | Motorola Edge 50 Fusion | Realme 17 5G | Infinix smart 8 | vivo X30 | Samsung Galaxy S24 5G | Infinix HOT 30 | Realme 10 Pro 5G | Motorole 5g Phone | Realme 5g smartphone | Apple 5g phone | iqoo 5g phones | Oneplus 5g phones | Vivo 5g phones | Oppo 5g Smart Phones | 4G Mobile | Nokia Mobile | Samsung Mobile | Oppo Mobile | Vivo Mobile | Apple Mobile</a><br>
+
+      <a href="#" class="story-item"><strong>CAMERA:</strong> GoPro Action Camera | Nikon Camera | Canon Camera | Sony Camera | Canon DSLR | Nikon DSLR</a><br>
+
+      <a href="#" class="story-item"><strong>LAPTOPS:</strong> Asus ROG Ally | MacBook Pro M2 | Premium Laptop | ASUS ROG Strix SCAR 18 (2023) Core i9 13th Gen | ASUS ROG Zephyrus M16 (2023) Core i9 13th Gen | ASUS Zenbook 14 OLED (2022) | Realme Book Prime Core i5 11th Gen | Microsoft Surface Go Pentium 128GB | Apple laptops | Acer laptops | lenovo laptops | Dell laptops | Asus laptops | Hp | laptops | Msi laptops | Samsung laptops | 7 in 1 laptops | Infinix INBook Y1 Plus | SAMSUNG Galaxy Book3 | 13th Gen Intel Core Laptops</a><br>
+
+      <a href="#" class="story-item"><strong>TVS:</strong> TV LG | LG TV | Sony TV | Samsung TV | TCL TV | MI TV | Panasonic TV | Oneplus TVs | iFalcon TV | 32 inch TV | 40 inch TV | 43 inch TV | 50 inch TV | 55 inch TV | 65 inch TV | 75 inch TV | LED TV | OLED TV | QLED TV</a><br>
+
+      <a href="#" class="story-item"><strong>LARGE APPLIANCES:</strong>  Electric Cookers | Air Fryer | Sandwich Maker | Electric Jug/Kettle/Travel Kettles | Induction Cooktops | Inverters | stabilizer | Wet Grinders | French Press | Milk/Coffee Frother | Chimneys | Microwave Ovens | Vacuum Cleaners | Fan</a><br>
+
+      <a href="#" class="story-item"><strong>CLOTHING:</strong> Saree | Men's Jeans | Lehnega | Tops | Mens Footwear | Shacket | Men's Jackets | Designer Blouses | Women's Haldi Dress | Women's Mehendi Dress | Lavender Saree | Blouse designs | Shirts | Cotton saree blouse designs | Tshirts | Men's Blazer | Dresses | One pieces | Readymade sarees | Groom wedding sherwani | Designer Suits salwar | Bra | Track Pant | Mens Kurta | Party Dresses | Palazzo Suits | Anarkali Gowns | Cut out dress | Salwar Suits | Kurta | Designer Sarees | Leggings | Shorts | Georgette Saree | Ethnic Wear | Blouse back design | Jodhpuri pants</a><br>
+
+      <a href="#" class="story-item"><strong>FOOTWEAR:</strong>  Adidas Shoes | Reebok Shoes | Nike Shoes | Puma Shoes | Boots | Balia Shoes | Crocs | Woodland Shoes | Skechers Shoes | Sneakers | Womens Boots | Sports Shoes | Loafers | Sandals | Lotto Sports Shoes | Casual Shoes | Womens Skechers Shoes | Asics Sports Shoes | Formal Shoes | School Shoes</a><br>
+
+      <a href="#" class="story-item"><strong>GROCERIES:</strong> A PhonePe Grocery Voucher | Hand Wash | Soap | Cashew Nuts | Sunflower Oil | Eggs | Toilet Cleaner | Harpic Toilet Cleaner | Dettol Soap | Mustard oil | Biscuits | Cheese | Patanjali Atta | Fortune Oil | Aashirvaad Atta | Tea</a><br>
+
+      <a href="#" class="story-item"><strong>BEST SELLING ON FLIPCART:</strong> Best Gas Geyser | Kitchen Geyser | Nutri Blenders | Portable Air Cooler | Best Air Cooler | Bags | Womens Watch | Hitachi Refrigerator 3 Door | Books | Candles | Helmets | Wall Clocks | Baby Food | Chocolates | Calculators | Laptops | Mask | Bangles | Vertiv UPS | Fastrack Watches | Wallets | Gold Coins | Realme Pad Mini | corei3 SW2 Smartwatch | MIvi DuoPods A350 | Speaker Cleaner</a><br>
+
+      <a href="#" class="story-item"><strong>FURNITURE:</strong>Furniture | Beds | Dining sets | Wardrobes | TV Units | Tables | Chairs | Shelves | Bean Bags | Office Chairs | Computer table | Office Tables | Red Sofa | Wakefit Beds | White Sofa | Wakefit Mattress | Green Sofa | Black Sofa | Brown Sofa</a><br>
+
+      <a href="#" class="story-item"><strong>BGMH:</strong> Car Accessories | Bike Accessories | Car Dashcams | Vehicle Battery | Engine Oil | Car Air Fresheners | Shampoo | Whey Protein | Homeopathy | Cricket | Cycles | Footballs | Treadmills | Fitness Accessories | Online Guitar | Books Store | Musical Instrument Store | Energy Drinks | Milk Drink Mixes | Protein Supplements</a><br>
+    </div>
+  </section>
+
+
+  <section class="online-shopping">
+    <h3>Flipkart: India's Ultimate One-Stop Online Shopping Destination</h3>
+
+    <div class="One-Stop-Online">
+    <p>Welcome to Flipkart, India's trusted and beloved e-commerce platform, revolutionising online shopping since 2007. With over 200 million users, 150 million+ products across 80+ categories, and a relentless focus on customer satisfaction, Flipkart isn't just an online store; it's your digital shopping companion. Be it the Flipkart app or the comprehensive Flipkart website, discover an unmatched universe of products, incredible Flipkart offers, blockbuster Flipkart sale events, and seamless service. From the latest gadgets to daily groceries, fashion must-haves to furniture solutions, Flipkart is your definitive destination for e-commerce in India, offering convenience, value, and reliability at every click. Experience the joy of buying online with India's homegrown leader!</p>
+
+    <p><strong>What Can You Buy From Flipkart?</strong><br><br>Flipkart's strength lies in its incredible diversity. With offerings for every need, aspiration, and budget, you can dive into the meticulously curated categories for your needs:</p>
+
+    <p><strong>Mobiles and Electronics: </strong>Flipkart has a wide range of mobiles with advanced features and the latest technology. As a leading e-commerce platform, we offer all the latest models from top brands. Explore the newest flagships from Samsung, Apple, OnePlus, Xiaomi, vivo, Oppo, and more. Find budget-friendly smartphones, power houses, gaming phones, and refurbished options. Additionally, Flipkart Complete Mobile Protection offers comprehensive coverage for post-purchase issues, including door-to-door services. Complement your device with extensive accessories: durable back covers, screen protectors, fast chargers, power banks, wireless earbuds, smartwatches, fitness bands, and VR headsets.</p> 
+    <p>Check out different types of laptops to power your work, creativity, and entertainment. Shop a vast range of laptops like ultrabooks, gaming laptops, business notebooks, chromebooks, and all-in-one PCs. Our Back To College store segregates laptops purpose-wise with recommendations from top brands and industry experts. You can also find a wide selection of tablets, bluetooth speakers, and headphones from top brands. In addition, explore digital cameras, smart home devices, printers, security cameras, powerful desktops and monitors to serve every purpose.</p>
+
+    <p><strong>Home and Kitchen Appliances: </strong>Upgrade your home and kitchen appliances to make your days more comfortable and convenient. Discover stunning Smart TVs, home theatre systems, soundbars, and streaming devices. Invest in essential large appliances: energy efficient refrigerators, washing machines, air conditioners, microwaves, water purifiers, air coolers, and geysers from trusted brands like LG, Samsung, Whirlpool, Godrej, and Voltas. Benefit from installation services and extended warranties. Flipkart has a massive collection of all the latest and trending range of these products. You can shop for your favourites among them at affordable prices. Additionally, our Dependable TV and Appliance Store ensures zero transit damage, with a replacement guarantee if anything goes wrong.</p> 
+    <p>Make daily chores effortless and enjoyable with modern kitchen appliances. Equip your kitchen with microwaves, mixer-grinders, air fryers, OTGs, electric kettles, induction cooktops, rice cookers, coffee makers, blenders, and sandwich makers. Keep your home spotless with robotic vacuum cleaners, handheld vacuum cleaners, steam mops, irons, and garment care. Enhance comfort with heaters, fans, and humidifiers. With the increase in pollution, make your home clean and hygienic with air purifiers.</p>
+    
+    <p><strong>Fashion and Beauty: </strong><p> Flipkart, India ka Fashion Capital, is your one-stop destination for anything and everything you need to look good. Express your unique style. Explore an enormous collection of clothing for men, women, and kids. You can choose from ethnic wear, western wear, activewear, nightwear, and innerwear. You can find footwear for every occasion and accessorize your outfits with handbags, watches, sunglasses, belts, and jewellery.</p> 
+    <p>Beauty and grooming products for everyone are available on Flipkart. Choose from a comprehensive range of skincare, makeup, haircare, fragrances, men's grooming, salon-style tools, and personal care essentials. You can choose offerings from top Indian and International brand.</p>
+
+    <p><strong>Home and Furniture: </strong><p> Upgrade the decor and functionality of your home with various items for home decor, options for home lighting, and equipment for home improvement. Furnish all the rooms in your home with exquisite offerings available for living rooms, bedrooms, dining rooms, study, and outdoor spaces. Explore modern home decor options like curtains, cushions, lamps, rugs, clocks, wall paintings, mirrors, photo frames, and decorative items.</p>
+    <p>Transform your home with our curated collection where comfort meets style. Unwind on our plush sofa sets and bean bags, or gather around elegant dining tables with matching chairs. Organize your world with stylish bookshelves and spacious cupboards, and revolutionize your cooking with a state-of-the-art modular kitchen. From serene mandir designs for sacred corners to the perfect mattress for restful nights, we have partnered with Asia's No.1 furniture retailer. Flipkart ensures a wide range of furniture that comes with a lab certification, passing 35 rigorous stability tests to guarantee up to 10 years of durability. Be FurniSure, always.</p>
+
+    <p><strong>Daily Essentials: </strong>Order household supplies like detergents, dishwash, cleaners, tissues, and toilet paper. Stock up on health and hygiene products (sanitizers, masks, vitamins, first-aid). Find pet food and supplies. Discover organic and sustainable options. Explore a variety of baby care needs on Flipkart. Find everything from diapers, wipes, baby food, and feeding bottles to strollers, car seats, cribs, high chairs, baby monitors, and bath essentials. Discover a world of toys (educational, soft, ride-ons), kids' apparel, footwear, school supplies, and maternity care products. Furthermore, browse through bestseller books, including fiction, non-fiction, academic texts, competitive exam guides, and children's books.</p>
+
+    <p><strong>Sports Equipment and Two Wheelers: </strong>You can explore a wide range of scooters, motorcycles, and electric vehicles (EVs) from leading manufacturers like Hero, Honda, TVS, Bajaj, Ola, Ather, and more. Access detailed specifications, compare models, check on-road prices, and explore financing options conveniently. You can also gear up for sports with equipment for cricket, football, badminton, tennis, cycling, fitness, and gym wear. You can also find video games (consoles, titles, accessories), board games, puzzles, and musical instruments.</p>
+
+    <p><strong>Gift Cards: </strong>Flipkart Gift Cards and e-Gift Vouchers offer unparalleled flexibility, allowing recipients to choose exactly what they desire from Flipkart's vast catalog. Different types of gift cards are available for every occasion: birthdays, anniversaries, weddings, festivals, corporate gifting, and more. Check out digital, personalised, physical, and corporate gift cards. You can also find multi-brand gift cards to shop across popular stores and services. These cards are available in various denominations, instantly delivered via email or SMS.</p>
+
+    <p><strong>Flipkart Flights: Book Your Next Getaway Effortlessly: </strong>Beyond products, Flipkart simplifies your travel planning! Flipkart Flights offers a powerful platform to search, compare, and book domestic flights across India at the most competitive prices. You can search for the flights you want and compare prices across multiple airlines, dates, and routes. Look for the 'Top Deals' section to explore several flight offers. You can also use the Travel Checklist category to proceed with the web check-in process. Do not forget to check the 'Your Safety Is Important To Us' section to know more about the safety guidelines. Check out the 'Best Deals' sections to save money while booking. You can use SuperCoins or opt for the EMI option to book tickets.</p>
+
+    <p><strong>Flipkart Minutes: Groceries and Gadgets in a Flash </strong>Experience the future of hyperlocal convenience with Flipkart Minutes. With this, you get:<br>
+    <strang>Hyperlocal Delivery of Daily Essentials and Gadgets: </strong>Flipkart Minutes delivers a curated selection of high-demand grocery items, personal care products, and small electronics within minutes, not hours or days.<br>
+    <strong>Fast Delivery via Dark Stores and Local Fulfillment:</strong> These 'dark stores' are micro-fulfillment centers which are stocked with thousands of essential products and are optimized for picking and packing efficiency.<br>
+    <strong>Availability in Select Cities:</strong> Currently transforming convenience in major metropolitan areas and rapidly expanding to more cities, you can check the Flipkart app to see if Minutes is available at your location.</p>
+
+    <p><strong>Flipkart Reset and Exchange Program: Trade-in Your Old Device</strong>Flipkart Reset offers you the opportunity to sell your old phone at the best price. You can also get an extra 4% value on your phone if you choose Flipkart Gift Card at checkout. Not only is this an effective way to sell old phones but it also helps reduce electronic waste that would be caused otherwise. Provide your phone details, set up an appointment with an executive, who will evaluate your phone at pickup and offer a final price. Money will be paid instantly.</p>
+    <p>Check out Flipkart Exchange Store to exchange your old electronic device for a new one on Flipkart. You can exchange laptops, phones, TVs, washing machines, mixers, refrigerators, tablets, and ACs. We take it even if the product does not work. It only takes a few simple steps. Find the product you want to buy, select the exchange option, provide details of the old product, and you will get an instant exchange discount on the new product.</p>
+
+    <p><strong>Flipkart Kilos: Your Online Grocery Supermarket</strong>Check out Flipkart Exchange Store to exchange your old electronic device for a new one on Flipkart. You can exchange laptops, phones, TVs, washing machines, mixers, refrigerators, tablets, and ACs. We take it even if the product does not work. It only takes a few simple steps. Find the product you want to buy, select the exchange option, provide details of the old product, and you will get an instant exchange discount on the new product.</p>
+
+    <p><strong>Why Choose Flipkart? The Unbeatable Advantages</strong><p>1.India's largest Selection: Millions of genuine products across every conceivable category.<br>
+
+    2.Unbeatable Value: Best prices guaranteed, amplified by frequent Flipkart offers, Flipkart sale mega-events, and coupon discounts.<br>
+
+    3.Seamless Shopping: Intuitive Flipkart website and award-winning Flipkart app for a smooth experience anytime, anywhere.<br>
+
+    4.Lightning Fast and Reliable Delivery: From standard shipping to 10-minute deliveries and slot-based options, get what you want delivered to you quickly and reliably. Plus, easy 10-day returns.<br>
+
+    5.Trust & Authenticity: 100% genuine products, secure payment gateways, and transparent policies.<br>
+
+    6.Customer First: Dedicated 24/7 customer support to resolve any queries.<br>
+
+    7.Innovation Leader: Constantly pioneering new services (like Minutes, Plus, FinTech) to enhance your experience.<br>
+
+   8.Your Partner in Life: From daily groceries to dream gadgets, festive shopping to furniture, we're here for every need.<br>
+
+   Experience the future of E-commerce today! Download the Flipkart App or Visit flipkart.com</p><br>
+
+    <p><strong>Get Exclusive Offers and Deals in Popular Sale Events</strong>Flipkart offers you the opportunity of getting the products of your choice with regular sale events that bring you some great offers and discounts. With major annual events like the Big Billion Days, End of Season Sale (EOSS), GOAT Sale, and more to choose from, you can plan your new purchases to make sure you get the best benefits and discounts. Additionally, you can also choose to shop during smaller but equally attractive monthly sales to get the products you want.</p>
+
+    </div>
+  </section>
+
+<!-- -----------footer-------- -->
+
+<footer class="footer">
+    <div class="footer-container">
+
+      <div class="footer-section">
+        <h4>ABOUT</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Flipkart Stories</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Corporate Information</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>GROUP COMPANIES</h4>
+        <ul>
+          <li><a href="#">Myntra</a></li>
+          <li><a href="#">Cleartrip</a></li>
+          <li><a href="#">Shopsy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>HELP</h4>
+        <ul>
+          <li><a href="#">Payments</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Cancellation & Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>CONSUMER POLICY</h4>
+        <ul>
+          <li><a href="#">Cancellation & Returns</a></li>
+          <li><a href="#">Terms Of Use</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">Grievance Redressal</a></li>
+          <li><a href="#">EPR Compliance</a></li>
+        </ul>
+      </div>
+
+      <div class="line">
+        <h4>|</h4><br>
+        
+      </div>
+
+      <div class="footer-section address">
+        <h4>Mail Us:</h4>
+        <p>Flipkart Internet Private Limited,<br>
+        Buildings Alyssa, Begonia &<br>
+        Clove Embassy Tech Village,<br>
+        Outer Ring Road, Devarabeesanahalli Village,<br>
+        Bengaluru, 560103,<br>
+        Karnataka, India</p>
+
+        <h4>Social:</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section address">
+        <h4>Registered Office Address:</h4>
+        <p>Flipkart Internet Private Limited,<br>
+        Buildings Alyssa, Begonia &<br>
+        Clove Embassy Tech Village,<br>
+        Outer Ring Road, Devarabeesanahalli Village,<br>
+        Bengaluru, 560103,<br>
+        Karnataka, India</p>
+        <p>CIN: U51109KA2012PTC066107</p>
+        <p>Telephone: 044-45614700 / 044-67415800</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="#"> <i class="fa-solid fa-store"></i>
+            Become a Seller</a>
+        <a href="#"> <i class="fa-solid fa-star"></i> 
+            Advertise</a>
+        <a href="#"> <i class="fa-solid fa-gift"></i>
+            Gift Cards</a>
+        <a href="#"> <i class="fa-regular fa-circle-question"></i>
+            Help Center</a>
+      </div>
+      <div class="copyright">
+    <p> 2007-2025 Flipcart.com</p>
+  </div>
+        <div class="paymnting">
+            <img src="./assets/images/payment-method-c454fb.svg" alt="">
+        </div>
+    </div>
+  </footer>
+
+<div class="space"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+</body>
+</html>

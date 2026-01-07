@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet the Team</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #ff4e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .intro {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .team, .guide {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .member, .guide-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .member:hover, .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .role {
+            font-weight: bold;
+            color: #ff4e50;
+        }
+        button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            border: none;
+            background-color: #ff4e50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #d8333f;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #001f61, #004aad);
+            color: #fff;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            border-top: 5px solid #ffcc00;
+            margin-top: 40px;
+        }
+
+        .footer div {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .footer a:hover {
+            color: #ffcc00;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 22px;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .footer div {
+                margin-bottom: 20px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Meet Our Team</h1>
+        <p class="intro">We are a passionate and dedicated team working together to create innovative solutions. Our combined efforts ensure the success of our project, and we are committed to excellence.</p>
+        
+        <div class="guide">
+            <div class="guide-card">
+                <h2>Prof. Sudhir Lawand</h2>
+                <p class="role">Mentor & Supervisor</p>
+                <p>Guiding us with his vast knowledge and experience, ensuring that we achieve our goals.</p>
+            </div>
+        </div>
+        
+        <div class="team">
+            <div class="member">
+                <h3>Vanshika Chalke</h3>
+                <p class="role">Developer & Content Manager</p>
+                <p>Ensures smooth development and manages content to deliver engaging experiences.</p>
+            </div>
+            <div class="member">
+                <h3>Geetanjali Gujal</h3>
+                <p class="role">Developer & Quality Analyst</p>
+                <p>Plays a key role in coding and analyzing the quality to ensure a flawless experience.</p>
+            </div>
+            <div class="member">
+                <h3>Kasturi Tawde</h3>
+                <p class="role">Developer & Designer</p>
+                <p>Brings creativity and technical expertise to design and develop innovative solutions.</p>
+            </div>
+            <div class="member">
+                <h3>Zuveria Kazi</h3>
+                <p class="role">Developer, Tester & Quality Analyst</p>
+                <p>Ensures the highest quality by developing and thoroughly testing every feature.</p>
+            </div>
+        </div>
+       
+        <button id="goBack">Go Back</button>
+    </div>
+
+    
+    <script>
+        document.getElementById("goBack").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

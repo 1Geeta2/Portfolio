@@ -1,0 +1,120 @@
+Sr No,State,District,Hospital Name,Phone Number
+1,Maharashtra,Mumbai,KEM Hospital,022-24136051
+2,Maharashtra,Mumbai,Sion Hospital,022-24076381
+3,Maharashtra,Mumbai,J.J. Hospital,022-23735555
+4,Maharashtra,Mumbai,St. George's Hospital,022-22620344
+5,Maharashtra,Pune,Sassoon Hospital,020-26128000
+6,Maharashtra,Pune,Aundh General Hospital,020-25888700
+7,Maharashtra,Pune,B.J. Medical College & Hospital,020-26123371
+8,Maharashtra,Nagpur,Indira Gandhi Medical College,0712-2743588
+9,Maharashtra,Nagpur,Government Medical College & Hospital,0712-2701688
+10,Maharashtra,Nashik,Dr. Vasantrao Pawar Medical College,0253-2303999
+11,Maharashtra,Nashik,Civil Hospital Nashik,0253-2578101
+12,Maharashtra,Thane,Thane Civil Hospital,022-25470307
+13,Maharashtra,Thane,Chhatrapati Shivaji Maharaj Hospital,022-25301002
+14,Maharashtra,Kolhapur,Chhatrapati Pramila Raje Hospital,0231-2642799
+15,Maharashtra,Kolhapur,Govt. Medical College & Hospital,0231-2656021
+16,Maharashtra,Sangli,Sangli Civil Hospital,0233-2375206
+17,Maharashtra,Sangli,Miraj Government Hospital,0233-2223703
+18,Maharashtra,Solapur,Solapur Civil Hospital,0217-2621601
+19,Maharashtra,Solapur,Dr. Vaishampayan Memorial Government Medical College,0217-2324743
+20,Maharashtra,Aurangabad,Government Medical College & Hospital,0240-2402412
+21,Maharashtra,Aurangabad,Civil Hospital Aurangabad,0240-2331177
+22,Maharashtra,Amravati,Amravati Civil Hospital,0721-2662744
+23,Maharashtra,Amravati,Dr. Panjabrao Deshmukh Medical College,0721-2662356
+24,Maharashtra,Jalgaon,Civil Hospital Jalgaon,0257-2231796
+25,Maharashtra,Jalgaon,Government Medical College,0257-2221765
+26,Maharashtra,Satara,Satara Civil Hospital,02162-234450
+27,Maharashtra,Satara,Krishna Institute of Medical Sciences,02162-241558
+28,Maharashtra,Akola,Akola Civil Hospital,0724-2438220
+29,Maharashtra,Akola,Government Medical College,0724-2431960
+
+41,Uttar Pradesh,Lucknow,KGMU Hospital,0522-2258880
+42,Uttar Pradesh,Lucknow,Dr. Ram Manohar Lohia Institute,0522-2665000
+43,Uttar Pradesh,Kanpur,GSVM Medical College,0512-2535483
+44,Uttar Pradesh,Kanpur,Lala Lajpat Rai Hospital,0512-2567580
+45,Uttar Pradesh,Varanasi,IMS BHU Hospital,0542-2367568
+46,Uttar Pradesh,Varanasi,Shree Shiv Prasad Gupta District Hospital,0542-2508380
+47,Uttar Pradesh,Agra,SN Medical College,0562-2260353
+48,Uttar Pradesh,Agra,District Hospital Agra,0562-2520695
+49,Madhya Pradesh,Bhopal,Hamidia Hospital,0755-2763655
+50,Madhya Pradesh,Indore,MediCiti Hospital,0731-2423650
+51,Madhya Pradesh,Jabalpur,Jabalpur District Hospital,0761-2672321
+52,Madhya Pradesh,Gwalior,Gwalior District Hospital,0751-2437200
+53,Madhya Pradesh,Ujjain,Civil Hospital Ujjain,0734-2534625
+54,Uttar Pradesh,Lucknow,King George's Medical University,0522-2257412
+55,Uttar Pradesh,Kanpur,Kanpur Medical College,0512-2228777
+56,Uttar Pradesh,Agra,SN Medical College,0562-2862721
+57,Uttar Pradesh,Varanasi,Banaras Hindu University Hospital,0542-2303074
+58,Uttar Pradesh,Meerut,MM Medical College & Hospital,0121-2766630
+59,Gujarat,Ahmedabad,Civil Hospital Ahmedabad,079-27661810
+60,Gujarat,Surat,SMC Civil Hospital,0261-2345000
+61,Gujarat,Rajkot,Rajkot Civil Hospital,0281-2466721
+62,Gujarat,Vadodara,S.S.G. Hospital,0265-2411230
+63,Gujarat,Bharuch,Bharuch District Hospital,02642-240098
+64,Tamil Nadu,Chennai,Government General Hospital,044-25360313
+65,Tamil Nadu,Madurai,Government Rajaji Hospital,0452-2583332
+66,Tamil Nadu,Coimbatore,Coimbatore Medical College Hospital,0422-2571200
+67,Tamil Nadu,Trichy,Mahathma Gandhi Memorial Government Hospital,0431-2773237
+68,Tamil Nadu,Salem,Salem Government Hospital,0427-2426880
+69,Rajasthan,Jaipur,SMS Hospital,0141-2632195
+70,Rajasthan,Udaipur,M.B. Hospital,0294-2527000
+71,Rajasthan,Ajmer,Ajmer District Hospital,0145-2634124
+72,Rajasthan,Jodhpur,Mahatma Gandhi Hospital,0291-2725630
+73,Rajasthan,Alwar,Alwar District Hospital,0144-2230466
+74,Haryana,Gurugram,Civil Hospital Gurugram,0124-2270815
+75,Haryana,Faridabad,Civil Hospital Faridabad,0129-2275616
+76,Haryana,Panipat,Civil Hospital Panipat,0180-2662205
+77,Haryana,Karnal,Karnal Civil Hospital,0184-2257450
+78,Haryana,Ambala,Ambala District Hospital,0171-2634773
+79,Bihar,Patna,Patna Medical College and Hospital,0612-2674539
+80,Bihar,Muzaffarpur,Muzaffarpur Medical College,0621-2242467
+81,Bihar,Bhagalpur,Jawaharlal Nehru Medical College,0641-2221325
+82,Bihar,Gaya,Gaya District Hospital,0631-2221578
+83,Bihar,Darbhanga,Darbhanga Medical College,06272-242026
+84,Kerala,Thiruvananthapuram,Government Medical College Hospital,0471-2557007
+85,Kerala,Kochi,Ernakulam General Hospital,0484-2351717
+86,Kerala,Calicut,Calicut Medical College,0495-2357022
+87,Kerala,Kottayam,Kottayam Government Medical College,0481-2572101
+88,Kerala,Thrissur,Government Medical College Thrissur,0487-2432277
+89,Karnataka,Bangalore,Victoria Hospital,080-22346251
+90,Karnataka,Mysore,Mysore Medical College,0821-2419247
+91,Karnataka,Hubli,KIMS Hubli,0836-2322750
+92,Karnataka,Bellary,Bellary District Hospital,08392-233145
+93,Karnataka,Udupi,Udupi District Hospital,0820-2527027
+94,West Bengal,Kolkata,S.S.K.M. Hospital,033-22120699
+95,West Bengal,Howrah,Howrah District Hospital,033-26530329
+96,West Bengal,Durgapur,Durgapur Steel Plant Hospital,0343-2542015
+97,West Bengal,Asansol,Asansol District Hospital,0341-2254773
+98,West Bengal,Malda,Malda Medical College Hospital,03512-252426
+99,Andhra Pradesh,Visakhapatnam,King George Hospital,0891-2741215
+100,Andhra Pradesh,Vijayawada,Government General Hospital,0866-2477777
+101,Andhra Pradesh,Tirupati,Tirupati District Hospital,0877-2285677
+102,Andhra Pradesh,Nellore,Nellore District Hospital,0861-2322969
+103,Andhra Pradesh,Kakinada,Kakinada Government Hospital,0884-2373100
+104,Telangana,Hyderabad,Osmania General Hospital,040-27689081
+105,Telangana,Warangal,Warangal District Hospital,0870-2457007
+106,Telangana,Khammam,Khammam Government Hospital,08742-242330
+107,Telangana,Karimnagar,Karimnagar District Hospital,0878-2244178
+108,Telangana,Nizamabad,Nizamabad District Hospital,08462-220646
+109,Punjab,Amritsar,Guru Nanak Dev Hospital,0183-2503825
+110,Punjab,Ludhiana,Dayanand Medical College,0161-2410205
+111,Punjab,Jalandhar,Civil Hospital Jalandhar,0181-2221321
+112,Punjab,Patiala,Rajindra Hospital,0175-2216011
+113,Punjab,Bhatinda,Civil Hospital Bathinda,0164-2210787
+114,Assam,Guwahati,Guwahati Medical College,0361-2528417
+115,Jharkhand,Ranchi,Rajendra Institute of Medical Sciences,0651-2541533
+116,Odisha,Bhubaneswar,AIIMS Bhubaneswar,0674-2476789
+117,Chhattisgarh,Raipur,Dr. Bhimrao Ambedkar Memorial Hospital,0771-2888000
+118,Goa,Panaji,Goa Medical College,0832-2458727
+119,Meghalaya,Shillong,NEIGRIHMS,0364-2538029
+120,Manipur,Imphal,RIMS Imphal,0385-2414629
+121,Nagaland,Kohima,Naga Hospital Authority,0370-2220123
+122,Tripura,Agartala,Agartala Government Medical College,0381-2357000
+123,Mizoram,Aizawl,Civil Hospital Aizawl,0389-2322310
+124,Sikkim,Gangtok,STNM Hospital,03592-202222
+125,Arunachal Pradesh,Itanagar,Tomato Memorial Hospital,0360-2212424
+126,Uttarakhand,Dehradun,Doon Medical College,0135-2726020
+127,Himachal Pradesh,Shimla,Indira Gandhi Medical College,0177-2659966
+128,Jammu and Kashmir,Srinagar,Sher-i-Kashmir Institute of Medical Sciences,0194-2401013
+129,Ladakh,Leh,SNM Hospital Leh,01982-252012

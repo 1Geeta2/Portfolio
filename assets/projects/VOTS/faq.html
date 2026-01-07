@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - VOTS (Vidyalankar Organs and Tissue Transplantation)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #E0F2F1;
+            color: black;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #00695C;
+        }
+        .faq {
+            text-align: left;
+        }
+        .question {
+            background: #00897B;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s ease, background 0.3s;
+            position: relative;
+        }
+        .question:hover {
+            transform: scale(1.05);
+            background: #004D40;
+        }
+        .answer {
+            display: none;
+            padding: 15px;
+            background: #B2DFDB;
+            border-radius: 5px;
+            margin-top: 5px;
+            color: black;
+        }
+        .question:hover::after {
+            content: "Click to View Answer";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #004D40;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            background: #00796B;
+            border: none;
+            padding: 12px 24px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #004D40;
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frequently Asked Questions - VOTS</h1>
+        <div class="faq">
+            <div class="question">What is VOTS?</div>
+            <div class="answer">VOTS (Vidyalankar Organs and Tissue Transplantation) is an advanced organ donation platform offering real-time tracking, emergency hospital availability, awareness campaigns, and secure donor-recipient connectivity.</div>
+            
+            <div class="question">What makes VOTS different?</div>
+            <div class="answer">VOTS provides real-time organ tracking, emergency hospital availability, text-to-speech assistance for the deaf, precise location services, and enhanced donor registry with real-time status tracking.</div>
+            
+            <div class="question">How do I register as a donor?</div>
+            <div class="answer">To register as a donor, visit our website and complete the donor registration form. Your eligibility will be verified through a medical screening process.</div>
+            
+            <div class="question">How does real-time tracking work?</div>
+            <div class="answer">Our system tracks organs from the donor to the recipient using a secure GPS-enabled network, ensuring safe and efficient delivery.</div>
+            
+            <div class="question">Can I check hospital availability?</div>
+            <div class="answer">Yes, VOTS provides real-time hospital availability data, helping recipients locate transplant-ready medical facilities.</div>
+            
+            <div class="question">What support does VOTS provide?</div>
+            <div class="answer">VOTS offers donor and recipient support, including medical guidance, legal assistance, psychological counseling, and participation in awareness programs.</div>
+            
+            <div class="question">How does VOTS ensure ethical donation?</div>
+            <div class="answer">VOTS follows strict ethical and legal guidelines to ensure voluntary, safe, and medically approved organ donations.</div>
+            
+            <div class="question">Is organ donation safe for living donors?</div>
+            <div class="answer">Yes, living organ donation is safe with thorough medical evaluation and post-donation care to ensure the donor's health is not compromised.</div>
+            
+            <div class="question">What happens if a transplant fails?</div>
+            <div class="answer">If a transplant fails, medical professionals will assess the situation and consider re-transplantation or alternative treatments.</div>
+            
+            <div class="question">Can I track my donor or recipient?</div>
+            <div class="answer">To protect privacy, donor and recipient identities remain confidential, but case progress can be tracked anonymously.</div>
+        </div>
+        <div class="button-container">
+            <button onclick="goBack()">Go Back</button>
+            <button onclick="contactUs()">Have More Questions? Contact Us</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.question').forEach(item => {
+            item.addEventListener('click', () => {
+                let answer = item.nextElementSibling;
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    document.querySelectorAll('.answer').forEach(a => a.style.display = 'none');
+                    answer.style.display = 'block';
+                }
+            });
+        });
+        
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+        function contactUs() {
+            window.location.href = 'contact.html';
+        }
+    </script>
+</body>
+</html>

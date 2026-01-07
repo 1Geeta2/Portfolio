@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State and District Selection</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: #333;
+    }
+    .form-container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 900px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .dropdown-container {
+      margin-bottom: 15px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #005f73;
+      border-radius: 8px;
+    }
+    .social-icons {
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>Select State, District, and Hospital</h1>
+
+    <!-- State Dropdown -->
+    <div class="dropdown-container">
+      <h4>State</h4>
+      <select id="stateSelect">
+        <option value="ALL">Select State</option>
+        <option value="AR">Arunachal Pradesh</option>
+        <option value="AS">Assam</option>
+        <option value="BR">Bihar</option>
+        <option value="CT">Chhattisgarh</option>
+        <option value="GJ">Gujarat</option>
+        <option value="JH">Jharkhand</option>
+        <option value="KA">Karnataka</option>
+        <option value="MP">Madhya Pradesh</option>
+        <option value="TG">Telangana</option>
+        <option value="WB">West Bengal</option>
+      </select>
+    </div>
+
+    <!-- District Dropdown -->
+    <div class="dropdown-container">
+      <h4>District</h4>
+      <select id="districtSelect">
+        <option value="ALL">Select District</option>
+      </select>
+    </div>
+
+    <!-- Hospital Dropdown -->
+    <div class="dropdown-container">
+      <h4>Hospital</h4>
+      <select id="hospitalSelect">
+        <option value="ALL">Select Hospital</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    const stateSelect = document.getElementById('stateSelect');
+    const districtSelect = document.getElementById('districtSelect');
+    const hospitalSelect = document.getElementById('hospitalSelect');
+
+    const districts = {
+      AR: ['Itanagar', 'Tawang', 'Pasighat'],
+      AS: ['Guwahati', 'Dibrugarh', 'Silchar'],
+      BR: ['Patna', 'Gaya', 'Muzaffarpur'],
+      CT: ['Raipur', 'Bilaspur', 'Durg'],
+      GJ: ['Ahmedabad', 'Surat', 'Vadodara'],
+      JH: ['Ranchi', 'Jamshedpur', 'Dhanbad'],
+      KA: ['Bengaluru', 'Mysuru', 'Hubli'],
+      MP: ['Bhopal', 'Indore', 'Jabalpur'],
+      TG: ['Hyderabad', 'Warangal', 'Karimnagar'],
+      WB: ['Kolkata', 'Howrah', 'Durgapur']
+    };
+
+    const hospitals = {
+      Itanagar: ['TRIHMS Hospital'],
+      Tawang: ['Tawang District Hospital'],
+      Guwahati: ['Guwahati Medical College', 'Apollo Hospitals'],
+      Dibrugarh: ['Assam Medical College'],
+      Patna: ['AIIMS Patna', 'Paras Hospital'],
+      Raipur: ['AIIMS Raipur', 'Apollo Raipur'],
+      Ahmedabad: ['Zydus Hospital', 'CIMS Hospital'],
+      Ranchi: ['RIMS Ranchi', 'Medanta Ranchi'],
+      Bengaluru: ['Narayana Health', 'Manipal Hospital'],
+      Bhopal: ['AIIMS Bhopal', 'Bansal Hospital'],
+      Hyderabad: ['Apollo Hyderabad', 'Yashoda Hospital'],
+      Kolkata: ['Fortis Kolkata', 'AMRI Hospital']
+    };
+
+    function populateDistricts(state) {
+      districtSelect.innerHTML = <option value="ALL">Select District</option>;
+      if (districts[state]) {
+        districts[state].forEach(district => {
+          let option = document.createElement('option');
+          option.value = district;
+          option.textContent = district;
+          districtSelect.appendChild(option);
+        });
+      }
+    }
+
+    function populateHospitals(district) {
+      hospitalSelect.innerHTML = <option value="ALL">Select Hospital</option>;
+      if (hospitals[district]) {
+        hospitals[district].forEach(hospital => {
+          let option = document.createElement('option');
+          option.value = hospital;
+          option.textContent = hospital;
+          hospitalSelect.appendChild(option);
+        });
+      }
+    }
+
+    stateSelect.addEventListener('change', function () {
+      populateDistricts(this.value);
+      hospitalSelect.innerHTML = <option value="ALL">Select Hospital</option>;
+    });
+
+    districtSelect.addEventListener('change', function () {
+      populateHospitals(this.value);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organ Donation Awareness</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            color: #0083b0;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: auto;
+            padding-bottom: 15px;
+            text-align: justify;
+        }
+        button {
+            background-color: #0083b0;
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #005f73;
+        }
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        function showForm(formId) {
+            document.getElementById('donationFormContainer').style.display = 'none';
+            document.getElementById('recipientFormContainer').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function validateAndSubmit(event, formId, actionUrl) {
+            event.preventDefault(); // Prevent normal form submission
+
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+
+            fetch(actionUrl, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire("Success", data.message, "success");
+                    form.reset(); // Reset the form after successful submission
+                } else {
+                    Swal.fire("Error", data.message, "error");
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                Swal.fire("Error", "Something went wrong. Please try again.", "error");
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Organ Donation Awareness</h1>
+    <p>Organ donation is a noble act that gives the gift of life to those in need. Every donation can make a difference and save multiple lives. Join the movement today and become a hero by registering as a donor or recipient.</p>
+    
+    <h2>Why Should You Register?</h2>
+    <p>Registering as an organ donor allows you to leave a lasting impact and potentially save up to eight lives. If you or a loved one are in need of a transplant, registering as a recipient ensures you are in the database for a potential match. Take a step toward a better future today!</p>
+    
+    <button onclick="showForm('donationFormContainer')">Register as a Donor</button>
+    <button onclick="showForm('recipientFormContainer')">Register as a Recipient</button>
+
+    <!-- Donor Form -->
+    <div class="form-container" id="donationFormContainer">
+        <h2>Organ Donation Form</h2>
+        <p>By registering as a donor, you pledge to give a second chance at life to those in need. Your selfless act can be the difference between life and death.</p>
+        <form id="donationForm" onsubmit="validateAndSubmit(event, 'donationForm', 'donor_submit.php')" enctype="multipart/form-data">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label>Upload Aadhaar:</label>
+            <input type="file" id="aadhaar" name="aadhaar" required>
+            <label>Upload Medical Report:</label>
+            <input type="file" id="medicalReport" name="medicalReport" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Recipient Form -->
+    <div class="form-container" id="recipientFormContainer">
+        <h2>Organ Recipient Form</h2>
+        <p>If you are in need of an organ transplant, registering as a recipient can help you find a matching donor faster. Your registration increases the chances of finding a life-saving match.</p>
+        <form id="recipientForm" onsubmit="validateAndSubmit(event, 'recipientForm', 'recipient_submit.php')" enctype="multipart/form-data">
+            <label for="rname">Name:</label>
+            <input type="text" id="rname" name="name" required>
+            <label for="remail">Email:</label>
+            <input type="email" id="remail" name="email" required>
+            <label for="rphone">Phone:</label>
+            <input type="tel" id="rphone" name="phone">
+            <label for="organNeeded">Organ Needed:</label>
+            <input type="text" id="organNeeded" name="organ_needed">
+            <label for="neededBy">By when do you need the organ?</label>
+            <input type="date" id="neededBy" name="needed_by">
+            <label>Upload Aadhaar:</label>
+            <input type="file" name="aadhaar" required>
+            <label>Upload Medical Report:</label>
+            <input type="file" name="medicalReport" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

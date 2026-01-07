@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidyalankar Organ and Tissue Transplantation (VOTS)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .content h2 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .content img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem auto;
+            padding: 0.75rem 1.5rem;
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <h1>Vidyalankar Organ and Tissue Transplantation</h1>
+        <p>Transforming Lives Through Organ Donation</p>
+    </header>
+
+    <div class="container">
+        <section class="content">
+            <div>
+                <h2>About Us</h2>
+                <p>Vidyalankar Organ and Tissue Transplantation (VOTS) is a groundbreaking initiative dedicated to transforming lives. Our primary goal is to create awareness about the significance of organ donation and provide seamless, well-organized transplantation services that bridge the gap between donors and recipients.</p>
+            </div>
+            <img src="image/about.jpg" alt="Organ Donation Awareness">
+        </section>
+
+        <section class="content">
+            <img src="image/ser.png" alt="Organs">
+            <div>
+                <h2>Our Mission</h2>
+                <p>At VOTS, we are driven by our mission to save lives through a highly coordinated and transparent process. We believe that each organ donated is not just a gift of life, but also a chance to make the world a better place for future generations. By building stronger awareness campaigns, we aim to educate communities, break myths, and encourage individuals to step forward as donors.</p>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <h3>Innovative Platform</h3>
+                <p>Our platform leverages the latest technology to enable real-time organ tracking, ensuring every moment counts in saving lives.</p>
+            </div>
+            <div class="card">
+                <h3>Comprehensive Support</h3>
+                <p>We provide support for donors and recipients, including counseling, guidance, and a robust registry to monitor donor contributions and recipient needs.</p>
+            </div>
+            <div class="card">
+                <h3>Awareness Campaigns</h3>
+                <p>Join us in spreading hope, saving lives, and inspiring generations by breaking myths and encouraging organ donation.</p>
+            </div>
+        </section>
+
+        <a href="index.html" class="back-button">Go Back</a>
+    </div>
+</body>
+</html>

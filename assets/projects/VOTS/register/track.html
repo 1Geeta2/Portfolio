@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Organ Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            color: #ff4d4d;
+            font-size: 24px;
+        }
+        .map {
+            width: 100%;
+            height: 450px;
+            border-radius: 10px;
+            border: 2px solid #ff4d4d;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff4d4d, #ff9999);
+            transition: width 1s ease-in-out;
+        }
+        .status {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🚑 Live Organ Tracking</h2>
+        <div id="map" class="map"></div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="status">Tracking in Progress...</div>
+    </div>
+    <script>
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        
+        let map = L.map('map').setView([18.9784, 72.8325], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        let currentMarker = L.marker([18.9784, 72.8325]).addTo(map)
+            .bindPopup("Current Location: Nair Hospital, Mumbai").openPopup();
+        let destinationMarker = L.marker([18.5204, 73.8567]).addTo(map)
+            .bindPopup("Destination: Apollo Hospital, Pune").openPopup();
+        
+        let route = L.polyline([[18.9784, 72.8325], [18.5204, 73.8567]], {color: 'blue', weight: 5}).addTo(map);
+        
+        let progressBar = document.querySelector('.progress');
+        let statusText = document.querySelector('.status');
+        
+        db.ref("organLocation").on("value", (snapshot) => {
+            let data = snapshot.val();
+            if (data) {
+                let { lat, lng, progress } = data;
+                currentMarker.setLatLng([lat, lng]);
+                progressBar.style.width = progress + "%";
+                if (progress >= 100) {
+                    statusText.innerText = "Organ has arrived at Apollo Hospital, Pune!";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

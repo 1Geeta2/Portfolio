@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTS Emergency Contact & First Aid Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #dc3545;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .emergency-list {
+            list-style: none;
+            padding: 0;
+        }
+        .emergency-item {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .emergency-item:hover {
+            background-color: #ffe5e5;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #firstAidInfo {
+            display: none;
+            background: #ffebcc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        #firstAidInfo ul {
+            padding-left: 20px;
+        }
+        #firstAidInfo ul li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer {
+            background: linear-gradient(135deg, #001f61, #004aad);
+            color: #fff;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            border-top: 5px solid #ffcc00;
+        }
+        .footer div {
+            flex: 1;
+            margin: 10px;
+        }
+        .footer h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer a:hover {
+            color: #ffcc00;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 22px;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .social-icons a:hover {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            .footer div {
+                margin-bottom: 20px;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        🚑 VOTS Emergency Contact & First Aid Guide 🚨
+    </header>
+    
+    <div class="container">
+        <h2>Find Nearby Hospitals</h2>
+        <button onclick="location.href='lhos/government hospitals/governmenthospital.html.html'">Find Hospitals</button>
+    </div>
+    
+    <div class="container">
+        <h2>Emergency Contacts 📞</h2>
+        <ul class="emergency-list">
+            <li class="emergency-item">Ambulance: <a href="tel:108">Call 108</a></li>
+            <li class="emergency-item">Police: <a href="tel:100">Call 100</a></li>
+            <li class="emergency-item">Fire Brigade: <a href="tel:101">Call 101</a></li>
+            <li class="emergency-item">Disaster Helpline: <a href="tel:1078">Call 1078</a></li>
+            <li class="emergency-item">Medical Helpline: <a href="tel:102">Call 102</a></li>
+            <li class="emergency-item">Women Helpline: <a href="tel:1091">Call 1091</a></li>
+            <li class="emergency-item">Child Helpline: <a href="tel:1098">Call 1098</a></li>
+            <li class="emergency-item">Road Accident Emergency: <a href="tel:1073">Call 1073</a></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>First Aid Tips</h2>
+        <p>Click below to view essential first aid tips for common emergencies.</p>
+        <button onclick="showFirstAid()">View First Aid Tips</button>
+        <div id="firstAidInfo">
+            <ul>
+                <li><strong>CPR:</strong> Check breathing, call emergency, and start chest compressions.</li>
+                <li><strong>Burns:</strong> Run cool water over the burn, do not apply ice, and cover with a sterile dressing.</li>
+                <li><strong>Bleeding:</strong> Apply direct pressure with a clean cloth, elevate the wound, and seek medical help.</li>
+                <li><strong>Fractures:</strong> Immobilize the affected area, avoid moving the injured limb, and get medical assistance.</li>
+                <li><strong>Choking:</strong> Encourage coughing; if ineffective, perform abdominal thrusts (Heimlich maneuver).</li>
+                <li><strong>Snake Bite:</strong> Keep the affected limb still, avoid applying ice or cutting the wound, and seek emergency help.</li>
+                <li><strong>Heat Stroke:</strong> Move to a cool place, hydrate with water, and use cool compresses to lower body temperature.</li>
+                <li><strong>Heart Attack:</strong> Have the person sit down, loosen tight clothing, and call emergency services immediately.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <button onclick="location.href='index.html'">Go Back</button>
+    
+    <script>
+        function showFirstAid() {
+            var firstAidDiv = document.getElementById('firstAidInfo');
+            firstAidDiv.style.display = firstAidDiv.style.display === 'none' || firstAidDiv.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

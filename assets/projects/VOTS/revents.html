@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
+    <!-- SweetAlert2 (For Attractive Alerts) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .back-btn {
+            background-color: #e74c3c;
+        }
+        .back-btn:hover {
+            background-color: #c0392b;
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register for Event</h2>
+        <p id="eventTitle" style="font-weight: bold; color: #555;">Enter Your Details </p>
+
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="contactMethod">Register using</label>
+        <select id="contactMethod" onchange="toggleContactInput()">
+            <option value="">Select</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone Number</option>
+        </select>
+
+        <div id="emailField" style="display: none;">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <div id="phoneField" style="display: none;">
+            <label for="phone">Your Phone</label>
+            <input type="text" id="phone" placeholder="Enter your phone number">
+        </div>
+
+        <label for="eventText">Enter Event Name</label>
+        <input type="text" id="eventText" placeholder="Enter event name">
+
+        <div class="btn-container">
+            <button onclick="register()">Register</button>
+            <button class="back-btn" onclick="goBack()">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSRfmsFvRTBR5gx65eF4o3d_NAJwS3aiQ",
+            authDomain: "methodical-tea-448017-v7.firebaseapp.com",
+            projectId: "methodical-tea-448017-v7",
+            storageBucket: "methodical-tea-448017-v7.firebasestorage.app",
+            messagingSenderId: "1034946447435",
+            appId: "1:1034946447435:web:906fa9f41097eb719da5ce"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Show/Hide Contact Fields
+        function toggleContactInput() {
+            const method = document.getElementById("contactMethod").value;
+            document.getElementById("emailField").style.display = method === "email" ? "block" : "none";
+            document.getElementById("phoneField").style.display = method === "phone" ? "block" : "none";
+        }
+
+        // Registration Function with SweetAlert2
+        function register() {
+            const name = document.getElementById("name").value.trim();
+            const contactMethod = document.getElementById("contactMethod").value;
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const eventText = document.getElementById("eventText").value.trim();
+
+            if (!name || !contactMethod || !eventText) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Missing Fields!',
+                    text: 'Please fill all required fields.',
+                    confirmButtonColor: '#f39c12'
+                });
+                return;
+            }
+
+            if (contactMethod === "email" && (!email || !email.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/))) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Email!',
+                    text: 'Use a valid Gmail address.',
+                    confirmButtonColor: '#e74c3c'
+                });
+                return;
+            }
+
+            if (contactMethod === "phone" && (!phone || !phone.match(/^[0-9]{10}$/))) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Phone Number!',
+                    text: 'Must be 10 digits only.',
+                    confirmButtonColor: '#e74c3c'
+                });
+                return;
+            }
+
+            const contactInfo = contactMethod === "email" ? { email } : { phone };
+
+            db.collection("registrations").add({ 
+                name, 
+                selectedEvent: eventText, 
+                ...contactInfo 
+            })
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful!',
+                    text: 'Our team will contact you soon.',
+                    confirmButtonColor: '#2ecc71'
+                }).then(() => {
+                    location.reload();
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: error.message,
+                    confirmButtonColor: '#e74c3c'
+                });
+            });
+        }
+
+        // Go Back Function
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <style>
+        /* Custom styling for SweetAlert2 button */
+        .swal-button {
+            background-color: #2ecc71 !important;
+            color: white !important;
+            font-size: 16px !important;
+            padding: 10px 20px !important;
+            border-radius: 5px !important;
+        }
+    </style>
+</body>
+</html>

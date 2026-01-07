@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOTS Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        canvas {
+            max-width: 280px;
+            max-height: 280px;
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>VOTS Organ Donation Statistics</h2>
+        <p>At Vidyaankar Organ Donation and Transplantation (VOTS), we have already helped numerous needy individuals by providing life-saving organ transplants. Below is a graphical representation of the impact we have made so far. This pie chart showcases the number of successful organ donations facilitated through our platform.</p>
+        <div class="chart-container">
+            <canvas id="organChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const organData = {
+            labels: ["Kidney", "Liver", "Heart", "Lungs", "Pancreas", "Intestine"],
+            datasets: [{
+                label: "Number of Donations",
+                data: [45, 30, 20, 15, 10, 5],
+                backgroundColor: ["#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff", "#ff9f40"]
+            }]
+        };
+        
+        const ctx = document.getElementById("organChart").getContext("2d");
+        new Chart(ctx, {
+            type: "pie",
+            data: organData,
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                width: 280,
+                height: 280
+            }
+        });
+    </script>
+</body>
+</html>

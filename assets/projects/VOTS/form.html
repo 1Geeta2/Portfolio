@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awareness Form</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Glassmorphism effect for form container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* Form heading */
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Input group */
+        .input-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #ecf0f1;
+            color: #2c3e50;
+            outline: none;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: #7f8c8d;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 8px rgba(44, 62, 80, 0.4);
+        }
+
+        .input-group textarea {
+            resize: none;
+        }
+
+        /* Submit button */
+        button {
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            transform: scale(1.05);
+        }
+
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Awareness Form</h1>
+        <form id="awarenessform">
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="details">How you will help Us....</label>
+                <textarea id="details" name="details" rows="4" placeholder="Enter details here..." required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("awarenessform").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            const alertBox = document.createElement("div");
+            alertBox.textContent = " Form submitted successfully! Our team will Contact you soon";
+            alertBox.style.position = "fixed";
+            alertBox.style.top = "20px";
+            alertBox.style.left = "50%";
+            alertBox.style.transform = "translateX(-50%)";
+            alertBox.style.background = "#2ecc71";
+            alertBox.style.color = "#fff";
+            alertBox.style.padding = "15px 25px";
+            alertBox.style.borderRadius = "8px";
+            alertBox.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+            alertBox.style.fontSize = "1.2rem";
+            alertBox.style.fontWeight = "bold";
+            document.body.appendChild(alertBox);
+            setTimeout(() => {
+                alertBox.remove();
+            }, 3000);
+        });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./awareness.js"></script>
+</body>
+</html>

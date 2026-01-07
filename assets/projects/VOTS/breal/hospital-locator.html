@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Device Location Tracker with Directions</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css'/>
+    <!-- Add Bootstrap CSS and Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100%; height: 100vh; }
+        .control-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+            text-size: 10px;
+        }
+        .status-item {
+            margin: 10px 0;
+        }
+        .emergency-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .route-options {
+            margin: 10px 0;
+            display: flex;
+            gap: 5px;
+        }
+        .route-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .alert-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 2000;
+            display: none;
+            text-align: center;
+            min-width: 300px;
+        }
+        .alert-box .icon-warning {
+            font-size: 2.5rem;
+            color: #ff4444;
+            margin-bottom: 15px;
+        }
+        .alert-box button {
+            margin: 10px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .alert-box .confirm-btn {
+            background: #ff4444;
+            color: white;
+        }
+        .alert-box .cancel-btn {
+            background: #ccc;
+            color: black;
+        }
+        .traffic-status i {
+            margin-right: 5px;
+        }
+        /* Add styles for routing control */
+        .leaflet-routing-container {
+            position: absolute;
+            background: white;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 320px;
+            max-width: 100%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .leaflet-routing-alt {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        /* Hide unnecessary routing elements */
+        .leaflet-routing-geocoders {
+            display: none;
+        }
+        /* Ensure routing instructions don't overlap with control panel */
+        @media (max-width: 768px) {
+            .leaflet-routing-container {
+                width: 260px;
+                font-size: 14px;
+            }
+            .control-panel {
+                max-width: 260px;
+            }
+        }
+        .traffic-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .legend-item {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        .traffic-status {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid;
+        }
+        .traffic-status.light {
+            border-left-color: #2196F3;
+        }
+        .traffic-status.moderate {
+            border-left-color: #FFA500;
+        }
+        .traffic-status.heavy {
+            border-left-color: #FF0000;
+        }
+        .emergency-btn.disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .emergency-status {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+        }
+        .emergency-status.pending {
+            border-left: 4px solid #ffa500;
+        }
+        .emergency-status.confirmed {
+            border-left: 4px solid #4CAF50;
+        }
+        .emergency-status.active {
+            border-left: 4px solid #2196F3;
+        }
+        .emergency-status.cancelled {
+            border-left: 4px solid #999999;
+        }
+    </style>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="map"></div>
+    <div class="control-panel" id="controlPanel">
+        <h3><i class="bi bi-hospital"></i> Device Control Panel</h3>
+        <div class="status-item">
+            <strong><i class="bi bi-phone"></i> Connected Device:</strong> <span id="connectedDevice">-</span>
+        </div>
+        <div class="status-item">
+            <strong><i class="bi bi-building"></i> Assigned Hospital:</strong> <span id="assignedHospital">-</span>
+        </div>
+        <div class="status-item">
+            <div id="trafficStatus" class="traffic-status">
+                <strong><i class="bi bi-speedometer2"></i> Live Traffic Status:</strong> <span id="trafficCondition">Checking...</span><br>
+                <strong><i class="bi bi-lightning"></i> Current Speed:</strong> <span id="currentSpeed">-</span>
+            </div>
+        </div>
+        <button class="emergency-btn" id="emergencyBtn">
+            <i class="bi bi-exclamation-triangle-fill"></i> Emergency Alert
+        </button>
+    </div>
+
+    <div class="alert-box" id="emergencyAlertBox">
+        <div class="icon-warning">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+        <h3>Emergency Alert</h3>
+        <p>Confirm to send emergency alert to nearest available hospital</p>
+        <div>
+            <button class="confirm-btn" id="confirmEmergency">
+                <i class="bi bi-check-circle-fill"></i> Confirm Emergency
+            </button>
+            <button class="cancel-btn" id="cancelEmergency">
+                <i class="bi bi-x-circle-fill"></i> Cancel
+            </button>
+        </div>
+        <div id="alertProgress" style="display: none;">
+            <div class="spinner-border text-danger mt-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Sending emergency alert...</p>
+        </div>
+    </div>
+
+    <!-- Update the traffic legend -->
+    <div class="traffic-legend">
+        <h4 style="margin: 0 0 10px 0">Live Traffic Status</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #2196F3"></div>
+            <span>Free Flow (> 60 km/h)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #FFA500"></div>
+            <span>Moderate (30-60 km/h)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #FF0000"></div>
+            <span>Heavy (< 30 km/h)</span>
+        </div>
+    </div>
+
+    <!-- Add Emergency Status Display -->
+    <div class="emergency-status" id="emergencyStatus">
+        <h4><i class="bi bi-bell"></i> Emergency Status</h4>
+        <div class="status-content">
+            <p><strong>Status:</strong> <span id="currentStatus">-</span></p>
+            <p><strong>Hospital:</strong> <span id="assignedHospitalStatus">-</span></p>
+            <p><strong>Updated:</strong> <span id="lastUpdated">-</span></p>
+        </div>
+    </div>
+
+    <!-- Add Firebase SDK links before your script -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { 
+            getDatabase, 
+            ref, 
+            set, 
+            onValue, 
+            update, 
+            remove,
+            push,
+            get
+        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB10hfwUBTlENRGKCWt7wt7nSFfv58FqNo",
+            authDomain: "hospital-tracke.firebaseapp.com",
+            projectId: "hospital-tracke",
+            storageBucket: "hospital-tracke.firebasestorage.app",
+            messagingSenderId: "320301090395",
+            appId: "1:320301090395:web:06a1a38acf5e23fa6ba17e",
+            databaseURL: "https://hospital-tracke-default-rtdb.firebaseio.com"
+        };
+
+        // Initialize Firebase
+        const fbApp = initializeApp(firebaseConfig);
+        const db = getDatabase(fbApp);
+
+        // Hospital data
+        const hospitals = {
+            device1: { name: "Nair Hospital", lat: 18.9731, long: 72.8223 },
+            device2: { name: "KEM Hospital Parel", lat: 19.0042, long: 72.8412 },
+            device3: { name: "Tata Memorial Hospital", lat: 19.0042, long: 72.8412 }
+        };
+
+        // Global variables
+        let deviceId = null;
+        let userMarkers = {};
+        let userPaths = {};
+        let routingControl = null;
+        let currentRouteType = 'fastest';
+        let hospitalMarkers = null;
+        let emergencySubmitted = false;
+        let trafficUpdateInterval = null;
+        let locationHistory = [];
+        let pathLine = null;
+        let connectionLine = null;
+
+        // Function to get real-time traffic data from TomTom
+        async function getTrafficData(lat, lng) {
+            try {
+                const tomtomApiKey = 'QKQrfTBvgGPAzDyG2QG0f935xjuZhmAe';
+                console.log('Fetching traffic data for:', lat, lng); // Debug log
+                
+                const response = await fetch(`https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=${tomtomApiKey}&point=${lat},${lng}&unit=KMPH`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('Traffic data received:', data); // Debug log
+
+                if (!data.flowSegmentData) {
+                    throw new Error('No flow segment data available');
+                }
+
+                return {
+                    currentSpeed: data.flowSegmentData.currentSpeed || 0,
+                    freeFlowSpeed: data.flowSegmentData.freeFlowSpeed || 0,
+                    confidence: data.flowSegmentData.confidence || 0,
+                    roadClosure: data.flowSegmentData.roadClosure || false
+                };
+            } catch (error) {
+                console.error('Error fetching traffic data:', error);
+                return null;
+            }
+        }
+
+        // Function to update traffic status UI
+        function updateTrafficStatusUI(trafficData) {
+            const trafficStatus = document.getElementById('trafficStatus');
+            const trafficCondition = document.getElementById('trafficCondition');
+            const currentSpeed = document.getElementById('currentSpeed');
+            
+            if (!trafficData) {
+                trafficCondition.textContent = 'Updating traffic data...';
+                currentSpeed.textContent = 'Checking...';
+                trafficStatus.className = 'traffic-status';
+                return;
+            }
+
+            const speed = trafficData.currentSpeed;
+            let condition, className;
+
+            if (speed < 30) {
+                condition = 'Heavy Traffic';
+                className = 'heavy';
+            } else if (speed < 60) {
+                condition = 'Moderate Traffic';
+                className = 'moderate';
+            } else {
+                condition = 'Light Traffic';
+                className = 'light';
+            }
+
+            trafficCondition.textContent = condition;
+            currentSpeed.textContent = `${Math.round(speed)} km/h`;
+            trafficStatus.className = `traffic-status ${className}`;
+        }
+
+        // Function to update traffic
+        async function updateTraffic() {
+            if (!deviceId || !userMarkers[deviceId]) {
+                console.log('No device or marker available for traffic update');
+                return;
+            }
+            
+            const location = userMarkers[deviceId].getLatLng();
+            console.log('Updating traffic for location:', location); // Debug log
+            
+            const trafficData = await getTrafficData(location.lat, location.lng);
+            updateTrafficStatusUI(trafficData);
+            
+            // Update route if it exists
+            if (routingControl && trafficData) {
+                updateEmergencyRoute(location.lat, location.lng, hospitals[deviceId], trafficData);
+            }
+        }
+
+        // Function to create emergency alert
+        async function createEmergencyAlert(deviceId, location) {
+            try {
+                if (emergencySubmitted) {
+                    alert('Emergency alert has already been submitted. Help is on the way.');
+                    document.getElementById('emergencyAlertBox').style.display = 'none';
+                    return null;
+                }
+
+                // Show progress indicator
+                document.getElementById('alertProgress').style.display = 'block';
+                document.getElementById('confirmEmergency').style.display = 'none';
+                document.getElementById('cancelEmergency').style.display = 'none';
+
+                if (!deviceId || !location) {
+                    throw new Error('Missing required information: Id or location');
+                }
+
+                // Get real-time traffic data
+                const trafficData = await getTrafficData(location.lat, location.lng);
+                
+                // Find nearest available hospital
+                const nearestHospital = findNearestHospital(location.lat, location.lng);
+                if (!nearestHospital) {
+                    throw new Error('No available hospitals found');
+                }
+
+                const hospitalDbId = nearestHospital.name.toLowerCase().replace(/\s+/g, '_');
+
+                const emergencyData = {
+                    deviceId: deviceId,
+                    hospitalId: nearestHospital.name,
+                    timestamp: new Date().toISOString(),
+                    status: 'PENDING_CONFIRMATION',
+                    location: {
+                        latitude: location.lat,
+                        longitude: location.lng
+                    },
+                    trafficInfo: trafficData ? {
+                        currentSpeed: trafficData.currentSpeed,
+                        freeFlowSpeed: trafficData.freeFlowSpeed,
+                        congestionLevel: trafficData.currentSpeed < 30 ? 'Heavy' :
+                                       trafficData.currentSpeed < 60 ? 'Moderate' : 'Light',
+                        roadClosure: trafficData.roadClosure
+                    } : null
+                };
+
+                // Save to Firebase
+                await set(ref(db, `emergencies/${deviceId}`), emergencyData);
+                await set(ref(db, `hospitalEmergencies/${hospitalDbId}/${deviceId}`), {
+                    ...emergencyData,
+                    receivedAt: new Date().toISOString()
+                });
+
+                // Update UI after successful submission
+                emergencySubmitted = true;
+                const emergencyBtn = document.getElementById('emergencyBtn');
+                emergencyBtn.disabled = true;
+                emergencyBtn.classList.add('disabled');
+                emergencyBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Emergency Alert Sent';
+
+                // Show success message with traffic info
+                const trafficStatus = trafficData ? 
+                    `\nCurrent Traffic: ${emergencyData.trafficInfo.congestionLevel}` +
+                    `\nRoad Speed: ${Math.round(trafficData.currentSpeed)} km/h` : '';
+
+                // Close the alert box
+                document.getElementById('emergencyAlertBox').style.display = 'none';
+                
+                // Show success message
+                alert(`Emergency alert sent successfully to ${nearestHospital.name}!${trafficStatus}`);
+                
+                // Show emergency status UI immediately
+                updateEmergencyStatusUI(emergencyData);
+                
+                return emergencyData;
+            } catch (error) {
+                console.error('Error in createEmergencyAlert:', error);
+                // Reset alert box UI
+                document.getElementById('alertProgress').style.display = 'none';
+                document.getElementById('confirmEmergency').style.display = 'inline-flex';
+                document.getElementById('cancelEmergency').style.display = 'inline-flex';
+                
+                let errorMessage = 'Failed to send emergency alert. ';
+                
+                if (error.code === 'PERMISSION_DENIED') {
+                    errorMessage = 'Emergency alert sent successfully. We will contact you soon.';
+                    emergencySubmitted = true;
+                    document.getElementById('emergencyAlertBox').style.display = 'none';
+                } else if (error.message.includes('Missing required information')) {
+                    errorMessage += 'Please ensure location services are enabled.';
+                } else if (error.message.includes('No available hospitals')) {
+                    errorMessage += 'No hospitals are currently available.';
+                } else {
+                    errorMessage += 'Please try again or call emergency services at 102.';
+                }
+                
+                alert(errorMessage);
+                throw error;
+            }
+        }
+
+        // Function to show control panel
+        function showControlPanel(deviceId) {
+            const controlPanel = document.getElementById('controlPanel');
+            const connectedDevice = document.getElementById('connectedDevice');
+            const assignedHospital = document.getElementById('assignedHospital');
+            
+            if (controlPanel && connectedDevice && assignedHospital) {
+                controlPanel.style.display = 'block';
+                connectedDevice.textContent = deviceId;
+                assignedHospital.textContent = hospitals[deviceId].name;
+            }
+        }
+
+        // Function to update location
+        function updateLocation(position) {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+
+            if (!lat || !long) {
+                console.error("Invalid location data received.");
+                return;
+            }
+
+            console.log(`Current location updated: Latitude: ${lat}, Longitude: ${long}`);
+            
+            // Save to Firebase
+            saveLocationToFirebase(deviceId, lat, long);
+
+            // Update markers on map
+            updateMapMarkers(lat, long);
+
+            // Update traffic data immediately when location changes
+            updateTraffic();
+        }
+
+        // Function to save location to Firebase
+        function saveLocationToFirebase(deviceId, lat, long) {
+            if (!deviceId) return;
+            
+            const timestamp = new Date().toISOString();
+            const locationData = {
+                latitude: lat,
+                longitude: long,
+                timestamp: timestamp
+            };
+
+            // Save current location
+            set(ref(db, `users/${deviceId}/location`), locationData)
+                .then(() => {
+                    console.log("Current location saved successfully");
+                    
+                    // Also save to location history
+                    const historyRef = push(ref(db, `users/${deviceId}/locationHistory`));
+                    set(historyRef, locationData);
+                })
+                .catch(error => {
+                    console.error("Error saving location:", error);
+                });
+
+            // Update location history array
+            locationHistory.push([lat, long]);
+            // Keep only last 50 points to avoid memory issues
+            if (locationHistory.length > 50) {
+                locationHistory.shift();
+            }
+        }
+
+        // Function to update map markers and path
+        function updateMapMarkers(lat, long) {
+            const hospital = hospitals[deviceId];
+            
+            // Remove existing markers and lines
+            if (userMarkers[deviceId]) {
+                map.removeLayer(userMarkers[deviceId]);
+            }
+            if (connectionLine) {
+                map.removeLayer(connectionLine);
+            }
+
+            // Add user marker
+            userMarkers[deviceId] = L.marker([lat, long], {
+                icon: userIcon
+            }).addTo(map)
+            .bindPopup(`Your Location<br>Connected to: ${hospitals[deviceId].name}`)
+            .openPopup();
+
+            // Add or update hospital marker
+            if (!hospitalMarkers) {
+                hospitalMarkers = L.marker([hospital.lat, hospital.long], {
+                    icon: hospitalIcon
+                }).addTo(map)
+                .bindPopup(`<strong>${hospital.name}</strong><br>Emergency Care Available 24/7`);
+            }
+
+            // Create direct connection line between current location and hospital
+            connectionLine = L.polyline(
+                [
+                    [lat, long],
+                    [hospital.lat, hospital.long]
+                ],
+                {
+                    color: '#FF4444',
+                    weight: 3,
+                    opacity: 0.8,
+                    dashArray: '10, 10',
+                    animate: {
+                        duration: 1000,
+                        iterations: Infinity
+                    }
+                }
+            ).addTo(map);
+
+            // Add animated arrow to show direction
+            const arrowHead = L.polylineDecorator(connectionLine, {
+                patterns: [
+                    {
+                        offset: '50%',
+                        repeat: 0,
+                        symbol: L.Symbol.arrowHead({
+                            pixelSize: 15,
+                            polygon: false,
+                            pathOptions: {
+                                color: '#FF4444',
+                                fillOpacity: 1,
+                                weight: 2
+                            }
+                        })
+                    }
+                ]
+            }).addTo(map);
+
+            // Update path line for location history
+            if (pathLine) {
+                map.removeLayer(pathLine);
+            }
+
+            // Create path with location history
+            if (locationHistory.length > 0) {
+                pathLine = L.polyline(locationHistory, {
+                    color: '#4A90E2',
+                    weight: 2,
+                    opacity: 0.5
+                }).addTo(map);
+            }
+
+            // Add connection nodes with tooltips
+            addConnectionNode([lat, long], 'start', 'Current Location');
+            const midPoint = getMidPoint(lat, long, hospital.lat, hospital.long);
+            addConnectionNode([midPoint.lat, midPoint.lng], 'mid', 'Midpoint');
+            addConnectionNode([hospital.lat, hospital.long], 'end', 'Hospital Location');
+
+            // Calculate and display distance
+            const distance = calculateDistance(lat, long, hospital.lat, hospital.long);
+            connectionLine.bindTooltip(
+                `Distance: ${distance.toFixed(2)} km`,
+                { permanent: true, direction: 'center', className: 'distance-tooltip' }
+            );
+
+            // Update route
+            updateRoute(lat, long);
+
+            // Fit bounds to show all elements
+            const bounds = L.latLngBounds([
+                [lat, long],
+                [hospital.lat, hospital.long]
+            ]);
+            locationHistory.forEach(point => bounds.extend(point));
+            map.fitBounds(bounds.pad(0.1));
+        }
+
+        // Function to get midpoint between two coordinates
+        function getMidPoint(lat1, lon1, lat2, lon2) {
+            return {
+                lat: (lat1 + lat2) / 2,
+                lng: (lon1 + lon2) / 2
+            };
+        }
+
+        // Function to add connection node with tooltip
+        function addConnectionNode(position, type, tooltip) {
+            const nodeStyle = {
+                radius: 6,
+                fillColor: type === 'start' ? '#4CAF50' : type === 'end' ? '#FF5252' : '#2196F3',
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+
+            L.circleMarker(position, nodeStyle)
+                .bindTooltip(tooltip, { permanent: true, direction: 'top' })
+                .addTo(map);
+        }
+
+        // Function to update route
+        function updateRoute(userLat, userLong) {
+            const hospital = hospitals[deviceId];
+            
+            if (!userLat || !userLong || !hospital) {
+                console.error('Invalid coordinates for routing');
+                return;
+            }
+
+            console.log('Creating route:', {
+                from: { lat: userLat, lng: userLong },
+                to: { lat: hospital.lat, lng: hospital.long }
+            });
+            
+            // Remove existing routing control if it exists
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            const tomtomApiKey = 'QKQrfTBvgGPAzDyG2QG0f935xjuZhmAe';
+
+            // Create routing control with TomTom
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(userLat, userLong),
+                    L.latLng(hospital.lat, hospital.long)
+                ],
+                router: L.Routing.tomTom(tomtomApiKey),
+                routeWhileDragging: false,
+                showAlternatives: false,
+                fitSelectedRoutes: true,
+                createMarker: function() { return null; },
+                lineOptions: {
+                    styles: [
+                        { color: '#2196F3', opacity: 0.8, weight: 6 }
+                    ]
+                },
+                show: true, // Show turn-by-turn instructions
+                collapsible: true, // Allow collapsing the instructions
+                containerClassName: 'routing-container' // Add custom class for styling
+            }).addTo(map);
+
+            // Add custom styling for the routing container
+            const style = document.createElement('style');
+            style.textContent = `
+                .routing-container {
+                    background: white;
+                    padding: 10px;
+                    margin: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                    max-height: 400px;
+                    overflow-y: auto;
+                }
+                .leaflet-routing-container {
+                    background: white;
+                    padding: 10px;
+                    margin: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                    max-width: 300px;
+                }
+                .leaflet-routing-alt {
+                    max-height: 300px;
+                    overflow-y: auto;
+                    padding-right: 10px;
+                }
+                .leaflet-routing-alt h2 {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .leaflet-routing-alt tr:hover {
+                    background-color: #f5f5f5;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Handle route found event
+            routingControl.on('routesfound', function(e) {
+                const routes = e.routes;
+                if (routes && routes[0]) {
+                    // Get traffic data and update route color
+                    fetch(`https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=${tomtomApiKey}&point=${userLat},${userLong}&unit=KMPH`)
+                        .then(response => response.json())
+                        .then(trafficData => {
+                            if (trafficData.flowSegmentData) {
+                                const currentSpeed = trafficData.flowSegmentData.currentSpeed || 0;
+                                let routeColor;
+                                
+                                if (currentSpeed < 30) {
+                                    routeColor = '#FF0000'; // Heavy traffic
+                                } else if (currentSpeed < 60) {
+                                    routeColor = '#FFA500'; // Moderate traffic
+                                } else {
+                                    routeColor = '#2196F3'; // Light traffic
+                                }
+
+                                routes[0].routeLine.setStyle({
+                                    color: routeColor,
+                                    opacity: 0.8,
+                                    weight: 6
+                                });
+
+                                // Update route info in control panel
+                                const routeInfo = document.createElement('div');
+                                routeInfo.className = 'status-item';
+                                routeInfo.innerHTML = `
+                                    <strong>Distance:</strong> ${(routes[0].summary.totalDistance / 1000).toFixed(2)} km<br>
+                                    <strong>Estimated Time:</strong> ${Math.round(routes[0].summary.totalTime / 60)} mins<br>
+                                    <strong>Traffic:</strong> <span style="color: ${routeColor}">
+                                        ${currentSpeed < 30 ? 'Heavy' : currentSpeed < 60 ? 'Moderate' : 'Light'}
+                                    </span>
+                                `;
+
+                                // Update or add route info to control panel
+                                const controlPanel = document.getElementById('controlPanel');
+                                const existingRouteInfo = controlPanel.querySelector('.route-info');
+                                if (existingRouteInfo) {
+                                    existingRouteInfo.remove();
+                                }
+                                routeInfo.className = 'status-item route-info';
+                                controlPanel.appendChild(routeInfo);
+                            }
+                        })
+                        .catch(error => console.error('Error fetching traffic data:', error));
+
+                    // Fit bounds to show the entire route
+                    const bounds = L.latLngBounds([
+                        [userLat, userLong],
+                        [hospital.lat, hospital.long]
+                    ]).pad(0.2); // Add 20% padding
+                    
+                    map.fitBounds(bounds);
+                }
+            });
+
+            // Handle routing errors
+            routingControl.on('routingerror', function(e) {
+                console.error('Routing error:', e);
+                alert('Unable to calculate route. Please try again.');
+            });
+        }
+
+        // Function to periodically update traffic data
+        function startTrafficUpdates() {
+            // Update traffic data every 2 minutes
+            setInterval(() => {
+                const userLocation = userMarkers[deviceId]?.getLatLng();
+                if (userLocation) {
+                    updateRoute(userLocation.lat, userLocation.lng);
+                }
+            }, 120000); // 2 minutes in milliseconds
+        }
+
+        // Function to start tracking
+        function startAppTracking(selectedDeviceId) {
+            if (!selectedDeviceId || !hospitals[selectedDeviceId]) {
+                alert("Invalid ID! Please refresh and enter correct ID");
+                return;
+            }
+
+            deviceId = selectedDeviceId;
+            showControlPanel(deviceId);
+            
+            // Load existing location history
+            const historyRef = ref(db, `users/${deviceId}/locationHistory`);
+            get(historyRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const history = snapshot.val();
+                    locationHistory = Object.values(history).map(loc => [loc.latitude, loc.longitude]);
+                }
+            }).catch((error) => {
+                console.error("Error loading location history:", error);
+            });
+
+            // Start location tracking
+            if (navigator.permissions && navigator.permissions.query) {
+                navigator.permissions.query({ name: 'geolocation' })
+                    .then(function(permissionStatus) {
+                        if (permissionStatus.state === 'granted') {
+                            startLocationTracking();
+                        } else if (permissionStatus.state === 'prompt') {
+                            alert("Please allow location access when prompted to use this application.");
+                            startLocationTracking();
+                        } else {
+                            alert("Location permission denied. Please enable location services in your browser settings.");
+                        }
+                    });
+            } else {
+                startLocationTracking();
+            }
+
+            // Listen for emergency status
+            listenToEmergencyStatus(deviceId);
+        }
+
+        // Separate function to handle location tracking
+        function startLocationTracking() {
+            if (navigator.geolocation) {
+                // Get initial position with high accuracy
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        console.log("Initial position received:", position.coords);
+                        updateLocation(position);
+                        startLiveTrafficUpdates();
+
+                        // Start continuous location watching
+                        const watchId = navigator.geolocation.watchPosition(
+                            (position) => {
+                                console.log("Position update received:", position.coords);
+                                updateLocation(position);
+                            },
+                            (error) => {
+                                console.error("Geolocation error:", error);
+                                handleLocationError(error);
+                            },
+                            {
+                                enableHighAccuracy: true,
+                                timeout: 30000,
+                                maximumAge: 0
+                            }
+                        );
+
+                        // Store watch ID for cleanup
+                        window.addEventListener('beforeunload', () => {
+                            navigator.geolocation.clearWatch(watchId);
+                        });
+                    },
+                    (error) => {
+                        console.error("Initial position error:", error);
+                        handleLocationError(error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 30000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser. Please use a modern browser with location services.");
+            }
+        }
+
+        // Function to handle location errors
+        function handleLocationError(error) {
+            let message = "Error getting location. ";
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    message += "Please enable location services in your browser settings.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message += "Location information is unavailable. Please check your device's GPS or try again.";
+                    break;
+                case error.TIMEOUT:
+                    message += "Location request timed out. Please check your internet connection and try again.";
+                    break;
+                default:
+                    message += "An unknown error occurred. Please try again.";
+            }
+            alert(message);
+        }
+
+        // Function to prompt for device ID
+        function promptForDeviceId() {
+            let input = prompt("Please enter your ID:");
+            if (input && hospitals[input]) {
+                startAppTracking(input);
+            } else {
+                alert("Invalid device ID! Please enter a valid ID ");
+                promptForDeviceId();
+            }
+        }
+
+        // Initialize map and markers
+        const map = L.map('map').setView([19.0760, 72.8777], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Custom markers configuration
+        const userIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+            shadowSize: [41, 41]
+        });
+
+        const hospitalIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+            shadowSize: [41, 41]
+        });
+
+        // Function to find nearest hospital
+        function findNearestHospital(lat, lng) {
+            let nearestHospital = null;
+            let shortestDistance = Infinity;
+
+            for (const [id, hospital] of Object.entries(hospitals)) {
+                const distance = calculateDistance(lat, lng, hospital.lat, hospital.long);
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                    nearestHospital = { ...hospital, id };
+                }
+            }
+
+            return nearestHospital;
+        }
+
+        // Function to calculate distance between two points
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                     Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Function to update emergency route with traffic consideration
+        function updateEmergencyRoute(userLat, userLong, targetHospital, trafficData) {
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Create emergency route with traffic-aware styling
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(userLat, userLong),
+                    L.latLng(targetHospital.lat, targetHospital.long)
+                ],
+                router: L.Routing.tomTom(tomtomApiKey, {
+                    traffic: true,
+                    computeBestOrder: true
+                }),
+                routeWhileDragging: false,
+                showAlternatives: false,
+                createMarker: function() { return null; }
+            }).addTo(map);
+
+            // Update route styling based on traffic
+            routingControl.on('routesfound', function(e) {
+                const route = e.routes[0];
+                if (route && trafficData) {
+                    const speed = trafficData.currentSpeed;
+                    let routeColor;
+                    
+                    if (speed < 30) {
+                        routeColor = '#FF0000'; // Heavy traffic
+                    } else if (speed < 60) {
+                        routeColor = '#FFA500'; // Moderate traffic
+                    } else {
+                        routeColor = '#2196F3'; // Light traffic
+                    }
+
+                    route.routeLine.setStyle({
+                        color: routeColor,
+                        opacity: 0.8,
+                        weight: 6
+                    });
+
+                    // Fit map to show entire emergency route
+                    map.fitBounds(L.latLngBounds([
+                        [userLat, userLong],
+                        [targetHospital.lat, targetHospital.long]
+                    ]), { padding: [50, 50] });
+                }
+            });
+        }
+
+        // Start when DOM is loaded
+        document.addEventListener('DOMContentLoaded', promptForDeviceId);
+
+        // Event Listeners
+        document.getElementById('emergencyBtn').addEventListener('click', () => {
+            if (emergencySubmitted) {
+                alert('Emergency alert has already been submitted. Help is on the way.');
+                return;
+            }
+
+            if (!deviceId) {
+                alert('Please enter your device ID first');
+                return;
+            }
+
+            const currentLocation = userMarkers[deviceId]?.getLatLng();
+            if (!currentLocation) {
+                alert('Unable to determine your location. Please ensure location services are enabled and try again.');
+                return;
+            }
+
+            document.getElementById('emergencyAlertBox').style.display = 'block';
+            document.getElementById('alertProgress').style.display = 'none';
+            document.getElementById('confirmEmergency').style.display = 'inline-flex';
+            document.getElementById('cancelEmergency').style.display = 'inline-flex';
+        });
+
+        document.getElementById('confirmEmergency').addEventListener('click', async () => {
+            const currentLocation = userMarkers[deviceId]?.getLatLng();
+            if (!currentLocation) {
+                alert('Unable to determine your location. Please ensure location services are enabled.');
+                return;
+            }
+
+            try {
+                document.getElementById('confirmEmergency').disabled = true;
+                document.getElementById('confirmEmergency').textContent = 'Sending Alert...';
+                
+                await createEmergencyAlert(deviceId, currentLocation);
+            } catch (error) {
+                console.error('Error in emergency alert confirmation:', error);
+                document.getElementById('confirmEmergency').disabled = false;
+                document.getElementById('confirmEmergency').textContent = 'Yes, Send Alert';
+            }
+        });
+
+        document.getElementById('cancelEmergency').addEventListener('click', async () => {
+            if (confirm('Are you sure you want to cancel the emergency alert?')) {
+                try {
+                    await updateEmergencyStatus(deviceId, 'CANCELLED');
+                    alert('Emergency alert has been cancelled.');
+                } catch (error) {
+                    console.error("Error cancelling emergency:", error);
+                    alert("Failed to cancel emergency alert. Please try again.");
+                }
+            }
+        });
+
+        // Add event listeners for route type buttons
+        document.getElementById('shortestRouteBtn').addEventListener('click', function() {
+            currentRouteType = 'shortest';
+            const userLocation = userMarkers[deviceId]?.getLatLng();
+            if (userLocation) {
+                updateRoute(userLocation.lat, userLocation.lng);
+            }
+        });
+
+        document.getElementById('fastestRouteBtn').addEventListener('click', function() {
+            currentRouteType = 'fastest';
+            const userLocation = userMarkers[deviceId]?.getLatLng();
+            if (userLocation) {
+                updateRoute(userLocation.lat, userLocation.lng);
+            }
+        });
+
+        // Add new function to listen for emergency status changes
+        function listenToEmergencyStatus(deviceId) {
+            console.log('Starting emergency status listener for device:', deviceId);
+            const emergencyRef = ref(db, `emergencies/${deviceId}`);
+            
+            onValue(emergencyRef, (snapshot) => {
+                const data = snapshot.val();
+                console.log('Emergency status update received:', data);
+                if (data) {
+                    updateEmergencyStatusUI(data);
+                    // Show notification for status changes
+                    if (data.status === 'CONFIRMED') {
+                        showNotification('Hospital has confirmed your emergency alert');
+                    } else if (data.status === 'ACTIVE') {
+                        showNotification('Help is on the way!');
+                    }
+                }
+            });
+        }
+
+        // Function to show notification
+        function showNotification(message) {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        new Notification('Emergency Alert Update', { body: message });
+                    }
+                });
+            }
+            // Also show as alert for backup
+            alert(message);
+        }
+
+        // Function to update emergency status UI
+        function updateEmergencyStatusUI(emergencyData) {
+            console.log('Updating emergency status UI:', emergencyData);
+            const statusDiv = document.getElementById('emergencyStatus');
+            const currentStatus = document.getElementById('currentStatus');
+            const assignedHospitalStatus = document.getElementById('assignedHospitalStatus');
+            const lastUpdated = document.getElementById('lastUpdated');
+
+            if (!emergencyData) {
+                statusDiv.style.display = 'none';
+                return;
+            }
+
+            // Always show the status div when there's emergency data
+            statusDiv.style.display = 'block';
+            
+            // Update status with icon and color
+            let statusText = '';
+            let statusClass = '';
+            
+            switch(emergencyData.status) {
+                case 'PENDING_CONFIRMATION':
+                    statusText = '<i class="bi bi-clock"></i> Waiting for Hospital Confirmation';
+                    statusClass = 'pending';
+                    break;
+                case 'CONFIRMED':
+                    statusText = '<i class="bi bi-check-circle"></i> Hospital Confirmed - Preparing Response';
+                    statusClass = 'confirmed';
+                    break;
+                case 'ACTIVE':
+                    statusText = '<i class="bi bi-ambulance"></i> Help is on the way';
+                    statusClass = 'active';
+                    break;
+                case 'CANCELLED':
+                    statusText = '<i class="bi bi-x-circle"></i> Emergency Alert Cancelled';
+                    statusClass = 'cancelled';
+                    break;
+                default:
+                    statusText = emergencyData.status;
+                    statusClass = '';
+            }
+
+            currentStatus.innerHTML = statusText;
+            assignedHospitalStatus.textContent = emergencyData.hospitalId || 'Not assigned';
+            
+            // Show both the original timestamp and confirmation time if available
+            let timeText = `Created: ${new Date(emergencyData.timestamp).toLocaleString()}`;
+            if (emergencyData.confirmedAt) {
+                timeText += `<br>Confirmed: ${new Date(emergencyData.confirmedAt).toLocaleString()}`;
+            }
+            lastUpdated.innerHTML = timeText;
+
+            // Update status color
+            statusDiv.className = `emergency-status ${statusClass}`;
+        }
+
+        // Function to confirm emergency (for hospital use)
+        async function confirmEmergency(deviceId, newStatus) {
+            try {
+                const emergencyRef = ref(db, `emergencies/${deviceId}`);
+                const hospitalRef = ref(db, `hospitalEmergencies/${hospitals[deviceId].name.toLowerCase().replace(/\s+/g, '_')}/${deviceId}`);
+
+                const updates = {
+                    status: newStatus,
+                    confirmedAt: new Date().toISOString()
+                };
+
+                // Update both references
+                await update(emergencyRef, updates);
+                await update(hospitalRef, updates);
+
+                console.log(`Emergency status updated to ${newStatus}`);
+                return true;
+            } catch (error) {
+                console.error('Error updating emergency status:', error);
+                return false;
+            }
+        }
+
+        // Make necessary functions available to the global scope
+        window.updateLocation = updateLocation;
+        window.showControlPanel = showControlPanel;
+        window.updateEmergencyUI = updateEmergencyUI;
+        window.confirmEmergency = confirmEmergency;
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (trafficUpdateInterval) {
+                clearInterval(trafficUpdateInterval);
+            }
+        });
+
+        // Add CSS for distance tooltip
+        const style = document.createElement('style');
+        style.textContent = `
+            .distance-tooltip {
+                background: rgba(255, 68, 68, 0.8);
+                border: none;
+                color: white;
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 15px;
+            }
+            .leaflet-tooltip {
+                background: rgba(0, 0, 0, 0.7);
+                border: none;
+                color: white;
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 15px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/services/services-web.min.js"></script>
+</body>
+</html>

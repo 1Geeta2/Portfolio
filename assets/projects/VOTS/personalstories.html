@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Stories & Testimonials</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            text-align: left;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .story-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            text-align: left;
+            transition: transform 0.3s ease, background 0.3s ease;
+            color: #34495e;
+        }
+        .story-box:hover {
+            transform: scale(1.03);
+            background: #eef2f7;
+        }
+        .add-story {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            color: #2c3e50;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #2c3e50;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .go-back {
+            background: #dc3545;
+        }
+        .go-back:hover {
+            background: #b02a37;
+        }
+        .social-icons {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Personal Stories & Testimonials</h2>
+        <div id="stories">
+            <div class='story-box'><strong>Aisha Khan</strong> <small>(2025-02-19)</small><p>Donating my kidney to my younger brother was the best decision of my life. Seeing him recover and live a normal life fills my heart with joy.</p></div>
+            <div class='story-box'><strong>Rahul Sharma</strong> <small>(2025-02-19)</small><p>After receiving a liver transplant, I realized how precious life is. Now, I advocate for organ donation awareness in my community.</p></div>
+            <div class='story-box'><strong>Emily Brown</strong> <small>(2025-02-19)</small><p>My father's heart transplant gave him a second chance at life. We are forever grateful to the donor family for their kindness.</p></div>
+            <div class='story-box'><strong>Amit Verma</strong> <small>(2025-02-19)</small><p>I registered as an organ donor five years ago. Knowing that I could save a life one day makes me feel proud.</p></div>
+            <div class='story-box'><strong>Sophia Wilson</strong> <small>(2025-02-19)</small><p>When my son needed a bone marrow transplant, a donor from across the world saved his life. I now support global donor registries.</p></div>
+        </div>
+        
+        <div class="add-story">
+            <h3>Add Your Story</h3>
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+                <textarea id="story" rows="4" placeholder="Your Story..."></textarea>
+            </div>
+            <div class="buttons">
+                <button onclick="addStory()">Submit</button>
+                <button class="go-back" onclick="goBack()">Go Back</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function addStory() {
+            let name = document.getElementById("name").value;
+            let story = document.getElementById("story").value;
+            let date = new Date().toISOString().split('T')[0];
+            if (name && story) {
+                let storiesDiv = document.getElementById("stories");
+                let newStory = `<div class='story-box'><strong>${name}</strong> <small>(${date})</small><p>${story}</p></div>`;
+                storiesDiv.innerHTML = newStory + storiesDiv.innerHTML;
+                document.getElementById("name").value = "";
+                document.getElementById("story").value = "";
+            } else {
+                alert("Please enter both name and story!");
+            }
+        }
+        
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

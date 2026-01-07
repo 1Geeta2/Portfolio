@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work - VOTS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff4e50, #ff7878);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #ff4e50;
+            margin-bottom: 1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem auto;
+            padding: 0.75rem 1.5rem;
+            background: #ff4e50;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background: #d43f3a;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #001f61, #004aad);
+            color: #fff;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            border-top: 5px solid #ffcc00;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .footer div {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .footer h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .footer a:hover {
+            color: #ffcc00;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 22px;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer div {
+                margin-bottom: 20px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Work</h1>
+    </header>
+
+    <div class="container">
+        <section class="grid">
+            <div class="card">
+                <h3>Real-Time Organ Tracking</h3>
+                <p>Our platform ensures that every donated organ is tracked in real-time for efficient and transparent transplantation.</p>
+            </div>
+            <div class="card">
+                <h3>Awareness Campaigns</h3>
+                <p>We conduct various awareness campaigns to educate people about organ donation and bust common myths.</p>
+            </div>
+            <div class="card">
+                <h3>Emergency Hospital Availability</h3>
+                <p>Our system helps find the nearest available hospital for organ transplantation in emergency situations.</p>
+            </div>
+            <div class="card">
+                <h3>Volunteer & Support Programs</h3>
+                <p>We offer programs for volunteers to support and help potential organ donors and recipients.</p>
+            </div>
+        </section>
+
+        <a href="index.html" class="back-button">Go Back</a>
+    </div>
+
+   
+</body>
+</html>
