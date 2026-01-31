@@ -64,7 +64,7 @@
       <div class="content text-center">
         <h1>Geetanjali Gunjal</h1>
         <h2>I'm <span class="typing-text"></span></h2>
-        <a href="#projects" class="btn">View My Work</a>
+        <a href="#footer" class="btn">View My Work</a>
         <a
           href="./assets/pdf/Geetanjali Gunjal (RESUME)..pdf"
           class="btn"
@@ -93,6 +93,43 @@
         </div>
       </div>
     </section>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const viewWorkBtn = document.querySelector('a[href="#project"]');
+    
+    if (viewWorkBtn) {
+      viewWorkBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const startPosition = window.pageYOffset;
+        const targetPosition = document.body.scrollHeight - window.innerHeight;
+        const distance = targetPosition - startPosition;
+        const duration = 10000; // 6 seconds - increase this for even slower
+        let start = null;
+        
+        function animation(currentTime) {
+          if (start === null) start = currentTime;
+          const timeElapsed = currentTime - start;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+        
+        function ease(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t + b;
+          t--;
+          return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+        
+        requestAnimationFrame(animation);
+      });
+    }
+  });
+</script>
+
     <script>
       const texts = ["Student", "Web Developer", "Designer"];
       let count = 0;
@@ -693,7 +730,7 @@
 
     <!-- Footer section end -->
 
-    <footer class="footer">
+    <footer class="footer"  id="footer">
       <div class="footer-container">
         <div class="footer-logo">
           <h2>Geeta <span>Verse</span></h2>
